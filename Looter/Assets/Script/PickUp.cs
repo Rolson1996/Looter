@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpScript : MonoBehaviour {
+public class PickUp : MonoBehaviour, IPlayerCollides {
 
     private PickUpEnum.LootType pickUpType;
     private int lootLevel;
-    private GameManager gameManager;
+    private GamePlay gameManager;
 
 
 	// Use this for initialization
 	void Start () {
 
-        gameManager = GameObject.Find("EventSystem").GetComponent<GameManager>();
+        gameManager = GameObject.Find("EventSystem").GetComponent<GamePlay>();
 
         lootLevel = ValueLoot(gameManager.createdSections - 2);
 
@@ -52,16 +52,16 @@ public class PickUpScript : MonoBehaviour {
 		//animation?
 	}
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Pick Up Collide");
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log("Pick Up Collide");
 
-        if (collision.gameObject.name == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerCollisonFunctions>().PlayerCollideWithPickUp(pickUpType);
-            this.gameObject.SetActive(false);
-        }
-    }
+    //    if (collision.gameObject.name == "Player")
+    //    {
+    //        collision.gameObject.GetComponent<PlayerCollisonFunctions>().PlayerCollideWithPickUp(pickUpType);
+    //        this.gameObject.SetActive(false);
+    //    }
+    //}
    
     private int ValueLoot(int currentLevel)
     {
@@ -87,5 +87,11 @@ public class PickUpScript : MonoBehaviour {
         {
             return Random.Range(lootBound - 2, lootBound + 1);
         }
+    }
+
+    public void CollideWithPlayer()
+    {
+        gameManager.PickedUpLoot(pickUpType);
+        Destroy(this.gameObject);
     }
 }

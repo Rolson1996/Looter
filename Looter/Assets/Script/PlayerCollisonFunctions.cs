@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCollisonFunctions : MonoBehaviour {
 
 
-    public GameManager gameManager;
+    public GamePlay gameManager;
 
 
     // Use this for initialization
@@ -22,15 +22,15 @@ public class PlayerCollisonFunctions : MonoBehaviour {
     {
         if(gameManager.CollectedLoot.Count == 0)
         {
-            gameManager.DropLoot();
+            //gameManager.DropLoot();
         }
-        if (gameManager.GetCurrentGamePhase() == GameManager.GamePhase.collecting)
+        if (gameManager.GetCurrentGamePhase() == GamePhase.collecting)
         {
             gameManager.StartTurning();
         }
         if (gameManager.AlarmActive)
         {
-            gameManager.DropLoot();         
+            //gameManager.DropLoot();         
         }
         gameManager.StartAlarm();
         

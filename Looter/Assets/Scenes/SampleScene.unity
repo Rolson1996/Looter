@@ -925,7 +925,6 @@ GameObject:
   - component: {fileID: 1054718090}
   - component: {fileID: 1054718089}
   - component: {fileID: 1054718086}
-  - component: {fileID: 1054718091}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1052,18 +1051,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1054718091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1054718085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99ba6987909765a419e7158408acd6a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!1 &1069401827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,21 +1280,20 @@ MonoBehaviour:
   player: {fileID: 1054718085}
   createdSections: 2
   SectionPrefabs:
-  - {fileID: 1802884924342402, guid: 7e3e983e77d6b574cbff9b8edcff1a7b, type: 2}
   - {fileID: 1516582190884346, guid: 706fb7f22fa38874d8260321d654e7c1, type: 2}
   - {fileID: 1608555641957472, guid: 1421a6ba1a00df84bb4b1d8b043e69e2, type: 2}
   CollectedLoot: 
   AlarmActiveTime: 0
   SizeOfBackpack: 5
   UIAlarms:
-  - {fileID: 216387995}
   - {fileID: 130213963}
+  - {fileID: 216387995}
   AlarmBackgroundGrey: {fileID: 359416396}
   AlarmBackgroundBlue: {fileID: 1628984326}
   AlarmBackgroundRed: {fileID: 324364955}
   UITextCapacity: {fileID: 786270577}
   UITextLootCollected: {fileID: 970776230}
-  PrototypeGameOverText: {fileID: 725438946}
+  PrototypeGameOverText: {fileID: 1069401827}
   PrototypeEscapedText: {fileID: 639611594}
 --- !u!1 &1581964216
 GameObject:

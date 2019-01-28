@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
 
-    public enum GamePhase {
-        collecting,
-        turning, 
-        escaping,
-        gameOver,
-        escaped
-    }
+public enum GamePhase
+{
+    collecting,
+    turning,
+    escaping,
+    gameOver,
+    escaped
+}
+
+public class GamePlay : MonoBehaviour {
+
+    
 
 
     private GamePhase currentGamePhase;
@@ -44,9 +48,10 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
+        new CollisionManager();
         currentGamePhase = GamePhase.collecting;
-        player.GetComponent<PlayerMovement>().gameManager = this;
-        player.GetComponent<PlayerCollisonFunctions>().gameManager = this;
+        player.GetComponent<Player>().gameManager = this;
+        //player.GetComponent<PlayerCollisonFunctions>().gameManager = this;
 
         UITextCapacity.GetComponent<Text>().text = SizeOfBackpack.ToString();
         UITextLootCollected.GetComponent<Text>().text = "0";
@@ -58,6 +63,10 @@ public class GameManager : MonoBehaviour {
 
         PrototypeGameOverText.SetActive(false);
         PrototypeEscapedText.SetActive(false);
+
+
+        CollisionManager.E_GuardCollides += AlertGuards;
+        CollisionManager.E_GuardCollides += HitGuard;
         
     }
 
@@ -121,7 +130,7 @@ public class GameManager : MonoBehaviour {
     public void StartEsacpe()
     {
         currentGamePhase = GamePhase.escaping;
-        player.GetComponent<PlayerMovement>().SetVelocityForEscape();
+        player.GetComponent<Player>().SetVelocityForEscape();
     }
 
     public void StartAlarm()
@@ -190,7 +199,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void DropLoot()
+    public void DropLoot(GameObject guardHit, GuardCollideEventArgs args)
     {
         if (CollectedLoot.Count > 0)
         {
@@ -213,7 +222,7 @@ public class GameManager : MonoBehaviour {
     {
         foreach (GameObject p in PickUpsOnMap)
         {
-            p.SetActive(false);
+            Destroy(p);
         }
     }
 
@@ -222,5 +231,24 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Game Over");
         SetGamePhase(GamePhase.gameOver);
         PrototypeGameOverText.SetActive(true);
+    }
+
+    void AlertGuards(GameObject guardHit, GuardCollideEventArgs args)
+    {
+        if (GetCurrentGamePhase() == GamePhase.collecting)
+        {
+            StartTurning();
+        }
+        StartAlarm();
+        RemovePickUpsFromMap();
+
+        CollisionManager.E_GuardCollides -= AlertGuards;
+        CollisionManager.E_GuardCollides += DropLoot;
+
+    }
+
+    void HitGuard(GameObject guardHit, GuardCollideEventArgs args)
+    {
+        Destroy(guardHit);
     }
 }

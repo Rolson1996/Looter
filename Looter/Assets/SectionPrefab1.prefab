@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4707338447652348}
   - component: {fileID: 212059726796476058}
-  - component: {fileID: 114515086807444242}
   - component: {fileID: 50282958075778384}
   - component: {fileID: 61239218732857672}
+  - component: {fileID: 114655175244553316}
   m_Layer: 0
   m_Name: guard
   m_TagString: Untagged
@@ -118,7 +118,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 2.25}
   m_EdgeRadius: 0
---- !u!114 &114515086807444242
+--- !u!114 &114655175244553316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1255267999745670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f57b41b30b7b954abec303738f54a7a, type: 3}
+  m_Script: {fileID: 11500000, guid: b6b316b3deea5c04b8f7661b98a5c0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212059726796476058
