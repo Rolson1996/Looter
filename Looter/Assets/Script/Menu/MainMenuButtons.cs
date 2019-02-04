@@ -15,9 +15,11 @@ public class MainMenuButtons : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start ()
+    {
+        AnimStore = StorePanel.GetComponent<Animation>();
+        AnimAchieve = AchievePanel.GetComponent<Animation>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -37,9 +39,9 @@ public class MainMenuButtons : MonoBehaviour {
     {
         if (!SidePanelOpen)
         {
-            //Pull over store panel from left
-            AnimStore = StorePanel.GetComponent<Animation>();
+            //Pull over store panel from left      
             AnimStore.Play("OpenStorePanel");
+            AnimAchieve.Play("HideAchieveTab");
             SidePanelOpen = true;
         }
     }
@@ -48,8 +50,8 @@ public class MainMenuButtons : MonoBehaviour {
         if (SidePanelOpen)
         {
             //Push store panel to the right
-            AnimStore = StorePanel.GetComponent<Animation>();
             AnimStore.Play("CloseStorePanel");
+            AnimAchieve.Play("ShowAchieveTab");
             SidePanelOpen = false;
         }
     }
@@ -58,9 +60,9 @@ public class MainMenuButtons : MonoBehaviour {
     {
         if (!SidePanelOpen)
         {
-            //pull over achievement Panel From right
-            AnimAchieve = AchievePanel.GetComponent<Animation>();
+            //pull over achievement Panel From right          
             AnimAchieve.Play("OpenAchievePanel");
+            AnimStore.Play("HideStoreTab");
             SidePanelOpen = true;
         }
     }
@@ -69,8 +71,8 @@ public class MainMenuButtons : MonoBehaviour {
         if (SidePanelOpen)
         {
             //Push achievement Panel to the right
-            AnimAchieve = AchievePanel.GetComponent<Animation>();
             AnimAchieve.Play("CloseAchievePanel");
+            AnimStore.Play("ShowStoreTab");
             SidePanelOpen = false;
         }
     }

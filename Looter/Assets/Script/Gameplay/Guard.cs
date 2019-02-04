@@ -5,7 +5,11 @@ using UnityEngine;
 public class Guard : MonoBehaviour, IPlayerCollides {
 
     private float PatrolSpeed = 2.0F;
-    private List<GameObject> Waypoints;
+    public List<GameObject> Waypoints;
+    private int TargetWaypoint = 0;
+
+
+    private bool test = true;
 
     public void CollideWithPlayer()
     {
@@ -17,16 +21,30 @@ public class Guard : MonoBehaviour, IPlayerCollides {
     // Use this for initialization
     void Start ()
     {
-        AlarmManager.E_AlarmStart += IncreaseGuardSpeed;
+        AlarmManager.E_AlarmStart += IncreaseGuardSpeed;       
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		//Animation
+        //Animation
 
         //Traverse Waypoints
-	}
+        if (GameplayManager.Instance.GetCurrentGamePhase() != GamePhase.turning)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Waypoints[TargetWaypoint].transform.position, PatrolSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, Waypoints[TargetWaypoint].transform.position) < 1)
+            {
+                Debug.Log("Waypoint");
+                //test = false;
+                TargetWaypoint++;
+                if(TargetWaypoint >= Waypoints.Count)
+                {
+                    TargetWaypoint = 0;
+                }
+            }
+        }
+    }
 
     private void IncreaseGuardSpeed(GameObject sender, AlarmEventArgs args)
     {

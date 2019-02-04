@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour {
 
-    public static CollisionManager instance = null;
+    public static CollisionManager Instance = null;
 
-	// Use this for initialization
-	void Awake ()
+    void Awake()
     {
-		if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-	}
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     public delegate void GuardCollideInteraction(GameObject sender, GuardCollideEventArgs args);
 
@@ -26,7 +29,6 @@ public class CollisionManager : MonoBehaviour {
             E_GuardCollides(sender, args);
         }
     }
-
 
     public delegate void LootCollideInteraction(GameObject sender, LootCollideEventArgs args);
 

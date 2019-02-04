@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -15,9 +16,9 @@ public enum GamePhase
 
 public class GameplayManager : MonoBehaviour {
 
-    public static GameplayManager instance = null;
-    private GamePhase currentGamePhase = GamePhase.collecting;
+    public static GameplayManager Instance = null;
 
+    private GamePhase currentGamePhase = GamePhase.collecting;
 
     public GameObject player;   
     public int createdSections = 2;
@@ -36,37 +37,75 @@ public class GameplayManager : MonoBehaviour {
     public GameObject PrototypeGameOverText;
     public GameObject PrototypeEscapedText;
 
+    private float MetersRan = 0;
+
 
     void Awake()
     {
-
-        if (instance == null)
+        if(Instance == null)
         {
-            instance = this;
-        }
+            Instance = this;
+            DontDestroyOnLoad(this);
+            new CollisionManager();
+            new AlarmManager();
 
-        new CollisionManager();
-        new AlarmManager();
+            UITextCapacity.GetComponent<Text>().text = SizeOfBackpack.ToString();
+            UITextLootCollected.GetComponent<Text>().text = "0";
+
+            CreateNewSection();
+
+            CollisionManager.E_GuardCollides += AlertGuards;
+            CollisionManager.E_LootCollides += PickedUpLoot;
+            PrototypeGameOverText.SetActive(false);
+            PrototypeEscapedText.SetActive(false);
+        }
+        else
+        {
+            Instance.ResetValues();
+            Destroy(this.gameObject);
+        }
+              
+        
+        //Attach Tracking for achievments, quest and tracking of currency?
+    }
+    public void ResetValues()
+    {
+        //reset variables
+        PickUpsOnMap.Clear();
+        CollectedLoot.Clear();
+
+        currentGamePhase = GamePhase.collecting;
+        MetersRan = 0;
+        createdSections = 2;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        UITextCapacity = GameObject.Find("BackpackLootCapacity");
+        UITextLootCollected = GameObject.Find("NumberCollectLoot");
+        PrototypeGameOverText = GameObject.Find("Prototype-GameOver");
+        PrototypeEscapedText = GameObject.Find("Prototype-Escaped");
+        PrototypeGameOverText.SetActive(false);
+        PrototypeEscapedText.SetActive(false);
 
         UITextCapacity.GetComponent<Text>().text = SizeOfBackpack.ToString();
         UITextLootCollected.GetComponent<Text>().text = "0";
-     
-        CreateNewSection();
-     
-        CollisionManager.E_GuardCollides += AlertGuards;
-        CollisionManager.E_LootCollides += PickedUpLoot;
 
-        //Attach Tracking for achievments, quest and tracking of currency?
+        CreateNewSection();
+        CollisionManager.E_GuardCollides -= DropLoot;
+        CollisionManager.E_GuardCollides += AlertGuards;
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
+        if(player == null)
+        {
+            var hold = "test";
+        }
 		
 	}
     
     public void StartTurning()
     {
         currentGamePhase = GamePhase.turning;
+        MetersRan = player.transform.position.y;
     }
 
     public void StartEsacpe()
@@ -111,6 +150,9 @@ public class GameplayManager : MonoBehaviour {
     //Game Ends Methods
     public void PlayerEscaped()
     {
+        CollisionManager.E_GuardCollides -= AlertGuards;
+        CollisionManager.E_GuardCollides -= DropLoot;
+
         Debug.Log("Player Escaped");
         SetGamePhase(GamePhase.escaped);
         PrototypeEscapedText.SetActive(true);
@@ -122,12 +164,20 @@ public class GameplayManager : MonoBehaviour {
         }
 
         PrototypeEscapedText.GetComponent<Text>().text = "You escaped, congratulations. \nYou escaped with " + CollectedLoot.Count + " piece(s) of loot. \nAmount of money earned: " + lootValue;
+
+        AchievementManager.instance.PlayerEscaped(MetersRan, lootValue);
+
+        SceneManager.LoadScene(0);
     }
     private void GameOver()
     {
+        CollisionManager.E_GuardCollides -= AlertGuards;
+        CollisionManager.E_GuardCollides -= DropLoot;
+
         Debug.Log("Game Over");
         SetGamePhase(GamePhase.gameOver);
         PrototypeGameOverText.SetActive(true);
+        SceneManager.LoadScene(0);
     }
 
 
@@ -161,17 +211,22 @@ public class GameplayManager : MonoBehaviour {
     {
         if (GetCurrentGamePhase() == GamePhase.collecting)
         {
+            if (CollectedLoot.Count == 0)
+            {
+                GameOver();
+            }
             StartTurning();
+        }
+        else
+        {
+            if (CollectedLoot.Count <= 1)
+            {
+                GameOver();
+            }
         }
         AlarmManager.AlarmStarts(guardHit, new AlarmEventArgs());
 
         CollisionManager.E_GuardCollides -= AlertGuards;
         CollisionManager.E_GuardCollides += DropLoot;
-
-        if(CollectedLoot.Count <= 1)
-        {
-            GameOver();
-        }
-
-    }    
+    }       
 }

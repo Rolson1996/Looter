@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class AlarmManager : MonoBehaviour {
 
-    public static AlarmManager instance = null;
-    static bool AlarmActive = false;
+    public static AlarmManager Instance = null;
 
-    // Use this for initialization
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
         }
     }
+
+    // Use this for initialization
+    
 
     public delegate void AlarmStartInteraction(GameObject sender, AlarmEventArgs args);
 
@@ -25,7 +30,6 @@ public class AlarmManager : MonoBehaviour {
         if (E_AlarmStart != null)
         {
             E_AlarmStart(sender, args);
-            AlarmActive = true;
             Debug.Log("Alarm On");
         }
     }

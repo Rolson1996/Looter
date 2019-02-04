@@ -30,20 +30,20 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.collecting)
+        if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
         {
 
-            if (playerTransform.position.y > (6.75 * (GameplayManager.instance.createdSections - 2)))
+            if (playerTransform.position.y > (6.75 * (GameplayManager.Instance.createdSections - 2)))
             {
-                GameplayManager.instance.CreateNewSection();
+                GameplayManager.Instance.CreateNewSection();
             }
 
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.turning)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning)
         {
             if(turning > 100)
             {
-                GameplayManager.instance.StartEsacpe();
+                GameplayManager.Instance.StartEsacpe();
                 playerRigidBody.rotation = 180F;
                 cameraFollow.UpdateCameraOffset(-0.05F);
             }
@@ -55,18 +55,18 @@ public class Player : MonoBehaviour {
                 cameraFollow.UpdateCameraOffset(-0.05F);
             }
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.escaping)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaping)
         {
             if (playerRigidBody.position.y <= 0)
             {
-                GameplayManager.instance.PlayerEscaped();
+                GameplayManager.Instance.PlayerEscaped();
             }
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.gameOver)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.gameOver)
         {      
             playerRigidBody.velocity = new Vector2(0, 0);           
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.escaped)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaped)
         {                     
             playerRigidBody.velocity = new Vector2(0, 0);
             playerRigidBody.rotation += 1.8F;
@@ -74,17 +74,16 @@ public class Player : MonoBehaviour {
     }
 
     public void StartMoveSideways(int direction)
-    {      
-        
-        if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.collecting)
+    {
+        if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
         {
             playerRigidBody.velocity = new Vector2(2.0F * direction * sidewaysSpeedMultiplier, ForwardSpeed) * forwardSpeedMultiplier;
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.turning)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning)
         {
             playerRigidBody.velocity = new Vector2(0, 0);
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.escaping)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaping)
         {
             playerRigidBody.velocity = new Vector2(2.0F * direction * sidewaysSpeedMultiplier, EscapeSpeed) * forwardSpeedMultiplier;
               
@@ -93,15 +92,15 @@ public class Player : MonoBehaviour {
 
     public void StopMoveSideways(int direction)
     {       
-        if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.collecting)
+        if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
         {
             playerRigidBody.velocity = new Vector2(0, ForwardSpeed) * forwardSpeedMultiplier;
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.turning)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning)
         {
             playerRigidBody.velocity = new Vector2(0, 0);
         }
-        else if (GameplayManager.instance.GetCurrentGamePhase() == GamePhase.escaping)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaping)
         {
             playerRigidBody.velocity = new Vector2(0, EscapeSpeed) * forwardSpeedMultiplier;
         }
@@ -120,6 +119,10 @@ public class Player : MonoBehaviour {
         {
             interactable.CollideWithPlayer();
         }        
+    }
+    private void OnDestroy()
+    {
+        var test = "hold";
     }
 
 }

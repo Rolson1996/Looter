@@ -511,10 +511,6 @@ C:\Users\o017861f\Documents\Looter\Looter\obj\Debug\Assembly-CSharp.csproj.CoreC
 C:\Users\o017861f\Documents\Looter\Looter\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\o017861f\Documents\Looter\Looter\obj\Debug\Assembly-CSharp.dll
 C:\Users\o017861f\Documents\Looter\Looter\obj\Debug\Assembly-CSharp.pdb
-C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.dll
-C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.pdb
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\Boo.Lang.dll
@@ -681,4 +677,8 @@ C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\Unit
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\UnityEngine.ClusterInputModule.xml
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\Temp\bin\Debug\UnityEngine.ClusterRendererModule.xml
+C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csproj.CopyComplete
+C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.dll
+C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.pdb
