@@ -66,13 +66,16 @@
     <Compile Include="Assets\Script\Gameplay\CameraFollow.cs" />
     <Compile Include="Assets\Script\Gameplay\CollisionManager.cs" />
     <Compile Include="Assets\Script\Gameplay\GameplayManager.cs" />
+    <Compile Include="Assets\Script\Gameplay\GameUI.cs" />
     <Compile Include="Assets\Script\Gameplay\Guard.cs" />
     <Compile Include="Assets\Script\Gameplay\IPlayerCollides.cs" />
     <Compile Include="Assets\Script\Gameplay\PickUp.cs" />
     <Compile Include="Assets\Script\Gameplay\PickUpEnum.cs" />
     <Compile Include="Assets\Script\Gameplay\Player.cs" />
-    <Compile Include="Assets\Script\Menu\AchievementManager.cs" />
+    <Compile Include="Assets\Script\Menu\AchievementsUI.cs" />
+    <Compile Include="Assets\Script\Menu\DataAndAchievementManager.cs" />
     <Compile Include="Assets\Script\Menu\MainMenuButtons.cs" />
+    <Compile Include="Assets\Script\Menu\ShopUI.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/o017861f.STUDENT/Documents/Looter SourceTree/Looter/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

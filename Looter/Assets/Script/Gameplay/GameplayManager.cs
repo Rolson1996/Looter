@@ -31,11 +31,8 @@ public class GameplayManager : MonoBehaviour {
 
     public int SizeOfBackpack = 5;  
 
-    public GameObject UITextCapacity;
-    public GameObject UITextLootCollected;
+    public GameUI UI;
 
-    public GameObject PrototypeGameOverText;
-    public GameObject PrototypeEscapedText;
 
     private float MetersRan = 0;
 
@@ -49,15 +46,14 @@ public class GameplayManager : MonoBehaviour {
             new CollisionManager();
             new AlarmManager();
 
-            UITextCapacity.GetComponent<Text>().text = SizeOfBackpack.ToString();
-            UITextLootCollected.GetComponent<Text>().text = "0";
+            UI = GameObject.FindGameObjectWithTag("Canvas").GetComponent<GameUI>();
+            UI.SetBackpackSize(SizeOfBackpack);
+            UI.SetNumberOfLoot(0);
 
             CreateNewSection();
 
             CollisionManager.E_GuardCollides += AlertGuards;
             CollisionManager.E_LootCollides += PickedUpLoot;
-            PrototypeGameOverText.SetActive(false);
-            PrototypeEscapedText.SetActive(false);
         }
         else
         {
@@ -79,27 +75,19 @@ public class GameplayManager : MonoBehaviour {
         createdSections = 2;
 
         player = GameObject.FindGameObjectWithTag("Player");
-        UITextCapacity = GameObject.Find("BackpackLootCapacity");
-        UITextLootCollected = GameObject.Find("NumberCollectLoot");
-        PrototypeGameOverText = GameObject.Find("Prototype-GameOver");
-        PrototypeEscapedText = GameObject.Find("Prototype-Escaped");
-        PrototypeGameOverText.SetActive(false);
-        PrototypeEscapedText.SetActive(false);
 
-        UITextCapacity.GetComponent<Text>().text = SizeOfBackpack.ToString();
-        UITextLootCollected.GetComponent<Text>().text = "0";
+        UI = GameObject.FindGameObjectWithTag("Canvas").GetComponent<GameUI>();
+        UI.SetBackpackSize(SizeOfBackpack);
+        UI.SetNumberOfLoot(0);
 
         CreateNewSection();
         CollisionManager.E_GuardCollides -= DropLoot;
         CollisionManager.E_GuardCollides += AlertGuards;
     }
     // Update is called once per frame
-    void Update () {
-        if(player == null)
-        {
-            var hold = "test";
-        }
-		
+    void Update ()
+    {
+        		
 	}
     
     public void StartTurning()
@@ -155,17 +143,16 @@ public class GameplayManager : MonoBehaviour {
 
         Debug.Log("Player Escaped");
         SetGamePhase(GamePhase.escaped);
-        PrototypeEscapedText.SetActive(true);
-
+        
         int lootValue = 0;
         foreach (LootType l in CollectedLoot)
         {
             lootValue = lootValue + PickUpEnum.GetLootValue(l);
         }
 
-        PrototypeEscapedText.GetComponent<Text>().text = "You escaped, congratulations. \nYou escaped with " + CollectedLoot.Count + " piece(s) of loot. \nAmount of money earned: " + lootValue;
+        DataAndAchievementManager.instance.PlayerEscaped(MetersRan, lootValue, CollectedLoot);
 
-        AchievementManager.instance.PlayerEscaped(MetersRan, lootValue);
+        UI.Escaped(CollectedLoot.Count, lootValue);
 
         SceneManager.LoadScene(0);
     }
@@ -176,7 +163,8 @@ public class GameplayManager : MonoBehaviour {
 
         Debug.Log("Game Over");
         SetGamePhase(GamePhase.gameOver);
-        PrototypeGameOverText.SetActive(true);
+        UI.GameOver();
+
         SceneManager.LoadScene(0);
     }
 
@@ -185,7 +173,8 @@ public class GameplayManager : MonoBehaviour {
     void PickedUpLoot(GameObject pickUp, LootCollideEventArgs args)
     {
         CollectedLoot.Add(args.lootType);
-        UITextLootCollected.GetComponent<Text>().text = CollectedLoot.Count.ToString();
+        
+        UI.SetNumberOfLoot(CollectedLoot.Count);
 
         if (CollectedLoot.Count >= SizeOfBackpack)
         {
@@ -199,7 +188,7 @@ public class GameplayManager : MonoBehaviour {
         if (CollectedLoot.Count > 1)
         {
             CollectedLoot.RemoveAt(CollectedLoot.Count - 1);
-            UITextLootCollected.GetComponent<Text>().text = CollectedLoot.Count.ToString();           
+            UI.SetNumberOfLoot(CollectedLoot.Count);
         }
         else
         {

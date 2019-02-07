@@ -6,13 +6,12 @@ using UnityEngine;
 
 public enum LootType
 {
-    Cash_1,
-    CashStack_5,
-    Goldbar_10,
-    CashBag_20,
-    GoldStack_40,
-    Diamond_75,
-    DiamondBag_200
+    Coin_1,
+    CoinStack_5,
+    CoinBag_10,
+    Diamond_30,
+    DiamondStack_75,
+    DiamondBag_125
 }
 public class PickUpEnum : MonoBehaviour {
  
@@ -20,20 +19,18 @@ public class PickUpEnum : MonoBehaviour {
     {
         switch (loot)
         {
-            case LootType.Cash_1:
+            case LootType.Coin_1:
                 return 1;             
-            case LootType.CashStack_5:
+            case LootType.CoinStack_5:
                 return 5;
-            case LootType.Goldbar_10:
+            case LootType.CoinBag_10:
                 return 10;
-            case LootType.CashBag_20:
-                return 20;
-            case LootType.GoldStack_40:
-                return 40;               
-            case LootType.Diamond_75:
+            case LootType.Diamond_30:
+                return 30;               
+            case LootType.DiamondStack_75:
                 return 75;               
-            case LootType.DiamondBag_200:
-                return 200;             
+            case LootType.DiamondBag_125:
+                return 125;             
         }
         return 1;
     }

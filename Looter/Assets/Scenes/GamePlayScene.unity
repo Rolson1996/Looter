@@ -1640,10 +1640,7 @@ MonoBehaviour:
   - {fileID: 1608555641957472, guid: 1421a6ba1a00df84bb4b1d8b043e69e2, type: 2}
   CollectedLoot: 
   SizeOfBackpack: 5
-  UITextCapacity: {fileID: 786270577}
-  UITextLootCollected: {fileID: 970776230}
-  PrototypeGameOverText: {fileID: 1069401827}
-  PrototypeEscapedText: {fileID: 639611594}
+  UI: {fileID: 0}
 --- !u!4 &1768019139
 Transform:
   m_ObjectHideFlags: 0
@@ -1934,9 +1931,10 @@ GameObject:
   - component: {fileID: 1950081112}
   - component: {fileID: 1950081111}
   - component: {fileID: 1950081115}
+  - component: {fileID: 1950081116}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2040,6 +2038,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &1950081116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950081110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7954d3b4b00bb2547a256dd858f8723b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UITextCapacity: {fileID: 786270577}
+  UITextLootCollected: {fileID: 970776230}
+  PrototypeGameOverText: {fileID: 1069401827}
+  PrototypeEscapedText: {fileID: 639611594}
 --- !u!1 &1951744539
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,12 +20,6 @@ public class MainMenuButtons : MonoBehaviour {
         AnimStore = StorePanel.GetComponent<Animation>();
         AnimAchieve = AchievePanel.GetComponent<Animation>();
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public void LoadLevel()
     {

@@ -18,26 +18,23 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
         switch (LootLevel)
         {
             case 1:
-                TypeOfLoot = LootType.Cash_1;
+                TypeOfLoot = LootType.Coin_1;
                 break;
             case 2:
-                TypeOfLoot = LootType.CashStack_5;
+                TypeOfLoot = LootType.CoinStack_5;
                 break;
             case 3:
-                TypeOfLoot = LootType.Goldbar_10;
+                TypeOfLoot = LootType.CoinBag_10;
                 break;
             case 4:
-                TypeOfLoot = LootType.CashBag_20;
+                TypeOfLoot = LootType.Diamond_30;
                 break;
             case 5:
-                TypeOfLoot = LootType.GoldStack_40;
+                TypeOfLoot = LootType.DiamondStack_75;
                 break;
             case 6:
-                TypeOfLoot = LootType.Diamond_75;
-                break;
-            case 7:
-                TypeOfLoot = LootType.DiamondBag_200;
-                break;
+                TypeOfLoot = LootType.DiamondBag_125;
+                break;           
         }
         //set sprite of pick up
 
@@ -64,13 +61,13 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
         {
             return Random.Range(1, 3);
         }
-        else if (lootBound == 9)
+        else if (lootBound == 7)
         {
-            return Random.Range(6, 8);
+            return Random.Range(5, 7);
         }
-        else if (lootBound > 9)
+        else if (lootBound > 8)
         {
-            return 7;
+            return 6;
         }
         else
         {

@@ -33,7 +33,7 @@ public class Guard : MonoBehaviour, IPlayerCollides {
         if (GameplayManager.Instance.GetCurrentGamePhase() != GamePhase.turning)
         {
             transform.position = Vector2.MoveTowards(transform.position, Waypoints[TargetWaypoint].transform.position, PatrolSpeed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, Waypoints[TargetWaypoint].transform.position) < 1)
+            if (Vector2.Distance(transform.position, Waypoints[TargetWaypoint].transform.position) < 0.1)
             {
                 Debug.Log("Waypoint");
                 //test = false;
