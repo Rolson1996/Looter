@@ -13,9 +13,9 @@ public class ShopUI : MonoBehaviour
 
     }
 
-    public void SetCashNumber(int TotalCash)
+    public void SetCashNumber(string TotalCash)
     {
-        CoinsGainedText.GetComponent<Text>().text = TotalCash.ToString();
+        CoinsGainedText.GetComponent<Text>().text = TotalCash;
     }
 
 }

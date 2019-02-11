@@ -7,9 +7,15 @@ public class DataAndAchievementManager : MonoBehaviour {
 
     public static DataAndAchievementManager instance = null;
 
+    private int CurrentCash = 0;
+
     private float TotalMetersRan = 0;
     private float FurthestRan = 0;
     private int TotalCashCollected = 0;
+    private int MostCashCollected = 0;
+    private int AttemptedRaids = 0;
+    private int TotalEsacpes = 0;
+
     private Dictionary<LootType, int> NumberOfLootTypesCollected = new Dictionary<LootType, int>();
    
 
@@ -37,11 +43,11 @@ public class DataAndAchievementManager : MonoBehaviour {
         }
         else
         {
-            Canvas = GameObject.FindGameObjectWithTag("Canvas");
-            SUI = Canvas.GetComponent<ShopUI>();
-            AUI = Canvas.GetComponent<AchievementsUI>();
+            instance.Canvas = GameObject.FindGameObjectWithTag("Canvas");
+            instance.SUI = Canvas.GetComponent<ShopUI>();
+            instance.AUI = Canvas.GetComponent<AchievementsUI>();
 
-            RefreshUi();
+            instance.RefreshUi();
             Destroy(this.gameObject);
         }
         
@@ -50,23 +56,42 @@ public class DataAndAchievementManager : MonoBehaviour {
 
     public void PlayerEscaped(float MetersRan, int CashCollected, List<LootType> LootTypes)
     {
+        CurrentCash = CurrentCash + CashCollected;
+
         TotalCashCollected = TotalCashCollected + CashCollected;
-        TotalMetersRan = TotalMetersRan + MetersRan;
+        TotalMetersRan = TotalMetersRan + (MetersRan * 2);
 
         if(FurthestRan < MetersRan)
         {
             FurthestRan = MetersRan;
         }
+        if (MostCashCollected < CashCollected)
+        {
+            MostCashCollected = CashCollected;
+        }
+        TotalEsacpes = TotalEsacpes + 1;
+        AttemptedRaids = AttemptedRaids + 1;
 
         foreach (LootType loot in LootTypes)
         {
             NumberOfLootTypesCollected[loot]++;
         }
     }
+    public void PlayerCaught()
+    {
+        AttemptedRaids = AttemptedRaids + 1;
+    }
 
     public void RefreshUi()
     {
-        SUI.SetCashNumber(TotalCashCollected);
+        SUI.SetCashNumber(CurrentCash.ToString());
+
+        AUI.SetTextAttemptedRaids(AttemptedRaids.ToString());
+        AUI.SetTextFurthest(((int)FurthestRan).ToString());
+        AUI.SetTextMostCash(MostCashCollected.ToString());
+        AUI.SetTextTotalEsacpes(TotalEsacpes.ToString());
+        AUI.SetTextTotalCash(TotalCashCollected.ToString());
+        AUI.SetTextTotalMeters(((int)TotalMetersRan).ToString());
     }
     
 }

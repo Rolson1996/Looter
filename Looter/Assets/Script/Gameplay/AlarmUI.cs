@@ -17,7 +17,7 @@ public class AlarmUI : MonoBehaviour {
     {
         AlarmActive = true;
         AnimAlarm.wrapMode = WrapMode.Loop;
-        AnimAlarm.Play("Alarm");
+        AnimAlarm.Play();
         AlarmManager.E_AlarmStart -= StartAlarmUI;
     }
 }

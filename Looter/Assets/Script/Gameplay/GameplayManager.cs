@@ -163,6 +163,9 @@ public class GameplayManager : MonoBehaviour {
 
         Debug.Log("Game Over");
         SetGamePhase(GamePhase.gameOver);
+
+        DataAndAchievementManager.instance.PlayerCaught();
+
         UI.GameOver();
 
         SceneManager.LoadScene(0);
