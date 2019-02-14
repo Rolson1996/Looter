@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
         playerRigidBody = this.gameObject.GetComponent<Rigidbody2D>();
         playerRigidBody.velocity = new Vector2(0, ForwardSpeed) * forwardSpeedMultiplier;
         cameraFollow = camera.GetComponent<CameraFollow>();
+
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
 	
 	// Update is called once per frame

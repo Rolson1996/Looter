@@ -17,11 +17,18 @@ public class DataAndAchievementManager : MonoBehaviour {
     private int TotalEsacpes = 0;
 
     private Dictionary<LootType, int> NumberOfLootTypesCollected = new Dictionary<LootType, int>();
+
+    [HideInInspector]
+    public Dictionary<int, bool> UnlockedSkins = new Dictionary<int, bool>();
    
 
     public GameObject Canvas;
     private ShopUI SUI;
     private AchievementsUI AUI;
+
+
+    public Sprite currentSkin;
+    public int currentSkinNumber = 0;
 
 
     // Use this for initialization
@@ -40,6 +47,13 @@ public class DataAndAchievementManager : MonoBehaviour {
             NumberOfLootTypesCollected.Add(LootType.Diamond_30, 0);
             NumberOfLootTypesCollected.Add(LootType.DiamondStack_75, 0);
             NumberOfLootTypesCollected.Add(LootType.DiamondBag_125, 0);
+
+            UnlockedSkins.Add(0, true);
+            UnlockedSkins.Add(1, true);
+            UnlockedSkins.Add(2, true);
+            UnlockedSkins.Add(3, true);
+            UnlockedSkins.Add(4, true);
+
         }
         else
         {
