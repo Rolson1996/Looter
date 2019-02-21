@@ -53,6 +53,8 @@ namespace Assets.Script.Menu
                 {
                     go.SetActive(false);
                 }
+
+                WardrobeCentre.GetComponent<Outline>().enabled = true;
             }
             if (UnlockedSkins.Count == 2)
             {
@@ -116,17 +118,97 @@ namespace Assets.Script.Menu
             {
                 WardrobeLeft.GetComponent<Image>().sprite = UnlockedSkins[UnlockedSkins.Count - 1];
                 WardrobeRight.GetComponent<Image>().sprite = UnlockedSkins[1];
+
+
+                if (DataAndAchievementManager.instance.currentSkinNumber == 0)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = true;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == 1)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = true;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == UnlockedSkins.Count - 1)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = true;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+
             }
             else if (MiddleSkin == UnlockedSkins.Count - 1)
             {
                 WardrobeRight.GetComponent<Image>().sprite = UnlockedSkins[0];
                 WardrobeLeft.GetComponent<Image>().sprite = UnlockedSkins[UnlockedSkins.Count - 2];
+
+                if (DataAndAchievementManager.instance.currentSkinNumber == UnlockedSkins.Count - 1)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = true;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == 0)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = true;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == UnlockedSkins.Count - 2)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = true;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
             }
             else
             {
                 WardrobeLeft.GetComponent<Image>().sprite = UnlockedSkins[MiddleSkin - 1];
                 WardrobeRight.GetComponent<Image>().sprite = UnlockedSkins[MiddleSkin + 1];
+
+
+                if (DataAndAchievementManager.instance.currentSkinNumber == MiddleSkin)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = true;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == MiddleSkin + 1)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = true;
+                }
+                else if (DataAndAchievementManager.instance.currentSkinNumber == MiddleSkin -1)
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = true;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
+                else
+                {
+                    WardrobeCentre.GetComponent<Outline>().enabled = false;
+                    WardrobeLeft.GetComponent<Outline>().enabled = false;
+                    WardrobeRight.GetComponent<Outline>().enabled = false;
+                }
             }
+
+            
         }
 
         public void SelectSkin(int BoxNumber)
@@ -147,6 +229,26 @@ namespace Assets.Script.Menu
 
             SelectedSkinIn.GetComponent<Image>().sprite = UnlockedSkins[SelectedSkinNumber];
             SelectedSkinOut.GetComponent<Image>().sprite = UnlockedSkins[SelectedSkinNumber];
+
+
+            if(BoxNumber == 0)
+            {
+                WardrobeCentre.GetComponent<Outline>().enabled = true;
+                WardrobeLeft.GetComponent<Outline>().enabled = false;
+                WardrobeRight.GetComponent<Outline>().enabled = false;
+            }
+            else if (BoxNumber == 1)
+            {
+                WardrobeCentre.GetComponent<Outline>().enabled = false;
+                WardrobeLeft.GetComponent<Outline>().enabled = false;
+                WardrobeRight.GetComponent<Outline>().enabled = true;
+            }
+            else if (BoxNumber == -1)
+            {
+                WardrobeCentre.GetComponent<Outline>().enabled = false;
+                WardrobeLeft.GetComponent<Outline>().enabled = true;
+                WardrobeRight.GetComponent<Outline>().enabled = false;
+            }
         }
     }
 }

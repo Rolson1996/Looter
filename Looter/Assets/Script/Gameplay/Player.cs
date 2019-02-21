@@ -14,8 +14,8 @@ public class Player : MonoBehaviour {
     private Transform playerTransform;
     private Rigidbody2D playerRigidBody;
 
-    private float ForwardSpeed = 2.0F;
-    private float EscapeSpeed = -2.5F;
+    private float ForwardSpeed = 2.75F;
+    private float EscapeSpeed = -3.0F;
 
     private int turning = 0;
 
@@ -124,7 +124,6 @@ public class Player : MonoBehaviour {
     }
     private void OnDestroy()
     {
-        var test = "hold";
     }
 
 }

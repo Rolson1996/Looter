@@ -21,7 +21,7 @@ public class GameplayManager : MonoBehaviour {
     private GamePhase currentGamePhase = GamePhase.collecting;
 
     public GameObject player;   
-    public int createdSections = 2;
+    public int createdSections = 1;
 
     public List<GameObject> SectionPrefabs;
 
@@ -72,7 +72,7 @@ public class GameplayManager : MonoBehaviour {
 
         currentGamePhase = GamePhase.collecting;
         MetersRan = 0;
-        createdSections = 2;
+        createdSections = 1;
 
         player = GameObject.FindGameObjectWithTag("Player");
 
