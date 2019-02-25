@@ -150,11 +150,7 @@ public class GameplayManager : MonoBehaviour {
             lootValue = lootValue + PickUpEnum.GetLootValue(l);
         }
 
-        DataAndAchievementManager.instance.PlayerEscaped(MetersRan, lootValue, CollectedLoot);
-
-        UI.Escaped(CollectedLoot.Count, lootValue);
-
-        SceneManager.LoadScene(0);
+        UI.Escaped(CollectedLoot.Count, lootValue, CollectedLoot, MetersRan);        
     }
     private void GameOver()
     {
