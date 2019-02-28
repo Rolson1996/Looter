@@ -56,8 +56,6 @@ public class GameUI : MonoBehaviour
         GameOverPanel.SetActive(true);
     }
 
-
-
     public void UpdateLoot(int IncreaseValue = 1)
     {
         DataAndAchievementManager.instance.PlayerEscaped(metersRan, lootValue * IncreaseValue, collectedLoot);
@@ -77,6 +75,8 @@ public class GameUI : MonoBehaviour
 
     public void ShowAdvert()
     {
+        //Load advert
+
         UpdateLoot(2);
         SceneManager.LoadScene(1);
     }
