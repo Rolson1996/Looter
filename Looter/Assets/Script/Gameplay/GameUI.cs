@@ -80,4 +80,5 @@ public class GameUI : MonoBehaviour
         UpdateLoot(2);
         SceneManager.LoadScene(1);
     }
+
 }
