@@ -632,8 +632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 108.34281, y: 130.57498}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 183, y: 93.39996}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &482531765
 GameObject:
@@ -1756,11 +1756,11 @@ Animation:
   m_GameObject: {fileID: 1064272360}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 81f0493dc22537a47ab55ee0325aff61, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 81f0493dc22537a47ab55ee0325aff61, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &1064272363
@@ -2911,6 +2911,7 @@ GameObject:
   - component: {fileID: 1950081111}
   - component: {fileID: 1950081115}
   - component: {fileID: 1950081116}
+  - component: {fileID: 1950081117}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -3034,6 +3035,27 @@ MonoBehaviour:
   PrototypeEscapedText: {fileID: 639611594}
   EscapedPanel: {fileID: 717803857}
   GameOverPanel: {fileID: 0}
+  LootToSafe: {fileID: 1064272360}
+  LootToSafeStartLocation: {fileID: 381364502}
+  AnimShowLoot: {fileID: 0}
+--- !u!114 &1950081117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950081110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7563c463e5c45408c50d735642efcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootSprite:
+  - {fileID: 21300000, guid: 21e4b9bccf323cd45a888463bea7b12a, type: 3}
+  - {fileID: 21300000, guid: f904ac69fe74fef42918b7da5dc0a4a4, type: 3}
+  - {fileID: 21300000, guid: 21e4b9bccf323cd45a888463bea7b12a, type: 3}
+  - {fileID: 21300000, guid: f904ac69fe74fef42918b7da5dc0a4a4, type: 3}
+  - {fileID: 21300000, guid: 21e4b9bccf323cd45a888463bea7b12a, type: 3}
+  - {fileID: 21300000, guid: f904ac69fe74fef42918b7da5dc0a4a4, type: 3}
 --- !u!1 &1951744539
 GameObject:
   m_ObjectHideFlags: 0

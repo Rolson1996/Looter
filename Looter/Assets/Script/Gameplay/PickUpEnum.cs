@@ -14,7 +14,10 @@ public enum LootType
     DiamondBag_125
 }
 public class PickUpEnum : MonoBehaviour {
- 
+
+
+    public Sprite[] LootSprite = new Sprite[6];
+
     public static int GetLootValue(LootType loot)
     {
         switch (loot)
@@ -34,5 +37,26 @@ public class PickUpEnum : MonoBehaviour {
         }
         return 1;
     }
+
+    public Sprite GetLootSprite(LootType loot)
+    {
+        switch (loot)
+        {
+            case LootType.Coin_1:
+                return LootSprite[0];
+            case LootType.CoinStack_5:
+                return LootSprite[0];
+            case LootType.CoinBag_10:
+                return LootSprite[0];
+            case LootType.Diamond_30:
+                return LootSprite[0];
+            case LootType.DiamondStack_75:
+                return LootSprite[0];
+            case LootType.DiamondBag_125:
+                return LootSprite[0];
+        }
+        return LootSprite[0];
+    }
+
 
 }

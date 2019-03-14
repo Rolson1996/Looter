@@ -16,10 +16,17 @@ public class GameUI : MonoBehaviour
     public GameObject EscapedPanel;
     public GameObject GameOverPanel;
 
+    public GameObject LootToSafe;
+    public GameObject LootToSafeStartLocation;
+    public Animation AnimShowLoot = null;
 
     private int lootValue;
     private List<LootType> collectedLoot;
     private float metersRan;
+
+
+    private PickUpEnum pickUpEnum;
+    private int lootShown = 0;
 
     // Use this for initialization
     void Start()
@@ -28,8 +35,27 @@ public class GameUI : MonoBehaviour
         PrototypeEscapedText.SetActive(false);
         EscapedPanel.SetActive(false);
         GameOverPanel.SetActive(false);
-    }
+        
 
+        //does not set
+        pickUpEnum = this.gameObject.GetComponent<PickUpEnum>();
+    }
+    void Update()
+    {
+        if(EscapedPanel.activeSelf)
+        {
+            if (AnimShowLoot == null)
+            {
+                AnimShowLoot = LootToSafe.GetComponent<Animation>();
+            }
+
+            if(!AnimShowLoot.isPlaying && lootShown < collectedLoot.Count)
+            {
+                ShowLoot();
+            }
+        }
+        
+    }
     public void SetNumberOfLoot(int Num)
     {
         UITextLootCollected.GetComponent<Text>().text = Num.ToString();
@@ -79,6 +105,13 @@ public class GameUI : MonoBehaviour
 
         UpdateLoot(2);
         SceneManager.LoadScene(1);
+    }
+
+    private void ShowLoot()
+    {
+        LootToSafe.GetComponent<Image>().sprite = pickUpEnum.GetLootSprite(collectedLoot[lootShown]);
+        LootToSafe.transform.position = LootToSafeStartLocation.transform.position;
+        AnimShowLoot.Play();
     }
 
 }
