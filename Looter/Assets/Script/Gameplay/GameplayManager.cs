@@ -33,9 +33,7 @@ public class GameplayManager : MonoBehaviour {
 
     public GameUI UI;
 
-
     private float MetersRan = 0;
-
 
     void Awake()
     {
@@ -72,7 +70,7 @@ public class GameplayManager : MonoBehaviour {
 
         currentGamePhase = GamePhase.collecting;
         MetersRan = 0;
-        createdSections = 1;
+        createdSections = 2;
 
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -160,11 +158,9 @@ public class GameplayManager : MonoBehaviour {
         Debug.Log("Game Over");
         SetGamePhase(GamePhase.gameOver);
 
-        DataAndAchievementManager.instance.PlayerCaught();
+        DataAndAchievementManager.instance.PlayerCaught(MetersRan);
 
         UI.GameOver();
-
-        SceneManager.LoadScene(0);
     }
 
 
@@ -203,7 +199,10 @@ public class GameplayManager : MonoBehaviour {
             {
                 GameOver();
             }
-            StartTurning();
+            else
+            {
+                StartTurning();
+            }
         }
         else
         {

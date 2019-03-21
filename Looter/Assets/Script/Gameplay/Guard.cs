@@ -7,10 +7,6 @@ public class Guard : MonoBehaviour, IPlayerCollides {
     private float PatrolSpeed = 2.0F;
     public List<GameObject> Waypoints;
     private int TargetWaypoint = 0;
-
-
-    private bool test = true;
-
     public void CollideWithPlayer()
     {
         //Event Dispacter

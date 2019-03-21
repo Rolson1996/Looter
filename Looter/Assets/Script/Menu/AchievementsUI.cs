@@ -12,6 +12,8 @@ public class AchievementsUI : MonoBehaviour {
     public GameObject TotalAttemptedVaultRaidsText;
     public GameObject TotalVaultEscapesText;
 
+    public List<GameObject> LootTypeCounters;
+
     public void SetTextTotalMeters(string newValue)
     {
         TotalMetersRanText.GetComponent<Text>().text = newValue + "M";
@@ -35,5 +37,10 @@ public class AchievementsUI : MonoBehaviour {
     public void SetTextTotalEsacpes(string newValue)
     {
         TotalVaultEscapesText.GetComponent<Text>().text = newValue + " Escapes";
+    }
+
+    public void SetCountOfLootType(int type, int count)
+    {
+        LootTypeCounters[type].GetComponent<Text>().text = count.ToString();
     }
 }

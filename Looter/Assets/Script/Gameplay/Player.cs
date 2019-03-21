@@ -73,6 +73,10 @@ public class Player : MonoBehaviour {
             playerRigidBody.velocity = new Vector2(0, 0);
             playerRigidBody.rotation += 1.8F;
         }
+
+        var pos = transform.localPosition;
+        pos.x = Mathf.Clamp(pos.x, -2.75F, 2.75F);
+        transform.localPosition = pos;
     }
 
     public void StartMoveSideways(int direction)
@@ -122,8 +126,4 @@ public class Player : MonoBehaviour {
             interactable.CollideWithPlayer();
         }        
     }
-    private void OnDestroy()
-    {
-    }
-
 }

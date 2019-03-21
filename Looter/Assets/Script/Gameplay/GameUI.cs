@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameUI : MonoBehaviour
 {
 
+    public GameObject ShowAdButton;
+
+    public GameObject GameOverCharacter;
+
     public GameObject UITextCapacity;
     public GameObject UITextLootCollected;
-
-    public GameObject PrototypeGameOverText;
-    public GameObject PrototypeEscapedText;
 
     public GameObject EscapedPanel;
     public GameObject GameOverPanel;
@@ -30,15 +31,10 @@ public class GameUI : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
-        PrototypeGameOverText.SetActive(false);
-        PrototypeEscapedText.SetActive(false);
+    {       
         EscapedPanel.SetActive(false);
         GameOverPanel.SetActive(false);
-        
-
-        //does not set
-        pickUpEnum = this.gameObject.GetComponent<PickUpEnum>();
+              
     }
     void Update()
     {
@@ -49,9 +45,15 @@ public class GameUI : MonoBehaviour
                 AnimShowLoot = LootToSafe.GetComponent<Animation>();
             }
 
+            if(pickUpEnum == null)
+            {
+                pickUpEnum = this.gameObject.GetComponent<PickUpEnum>();
+            }
+
             if(!AnimShowLoot.isPlaying && lootShown < collectedLoot.Count)
             {
                 ShowLoot();
+                lootShown++;
             }
         }
         
@@ -71,40 +73,44 @@ public class GameUI : MonoBehaviour
         collectedLoot = CollectedLoot;
         metersRan = MetersRan;
 
-        PrototypeEscapedText.SetActive(true);
+        UpdateLoot();
+
+        //PrototypeEscapedText.SetActive(true);
         EscapedPanel.SetActive(true);
-        PrototypeEscapedText.GetComponent<Text>().text = "You escaped, congratulations. \nYou escaped with " + LootCount + " piece(s) of loot. \nAmount of money earned: " + LootValue;
+        //PrototypeEscapedText.GetComponent<Text>().text = "You escaped, congratulations. \nYou escaped with " + LootCount + " piece(s) of loot. \nAmount of money earned: " + LootValue;
     }
 
     public void GameOver()
     {
-        PrototypeGameOverText.SetActive(true);
+        //PrototypeGameOverText.SetActive(true);
         GameOverPanel.SetActive(true);
+        GameOverCharacter.GetComponent<Image>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
 
-    public void UpdateLoot(int IncreaseValue = 1)
+    public void UpdateLoot()
     {
-        DataAndAchievementManager.instance.PlayerEscaped(metersRan, lootValue * IncreaseValue, collectedLoot);
+        DataAndAchievementManager.instance.PlayerEscaped(metersRan, lootValue, collectedLoot);
+    }
+    public void WatchedAd()
+    {
+        DataAndAchievementManager.instance.PlayerEscaped(0, lootValue, null);
     }
 
     public void ReturnMenu()
-    {
-        UpdateLoot();
+    {      
         SceneManager.LoadScene(0);
     }
 
     public void PlayAgain()
-    {
-        UpdateLoot();
+    {      
         SceneManager.LoadScene(1);
     }
 
     public void ShowAdvert()
     {
         //Load advert
-
-        UpdateLoot(2);
-        SceneManager.LoadScene(1);
+        WatchedAd();
+        ShowAdButton.SetActive(false);      
     }
 
     private void ShowLoot()

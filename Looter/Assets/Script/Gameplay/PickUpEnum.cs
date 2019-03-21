@@ -45,15 +45,15 @@ public class PickUpEnum : MonoBehaviour {
             case LootType.Coin_1:
                 return LootSprite[0];
             case LootType.CoinStack_5:
-                return LootSprite[0];
+                return LootSprite[1];
             case LootType.CoinBag_10:
-                return LootSprite[0];
+                return LootSprite[2];
             case LootType.Diamond_30:
-                return LootSprite[0];
+                return LootSprite[3];
             case LootType.DiamondStack_75:
-                return LootSprite[0];
+                return LootSprite[4];
             case LootType.DiamondBag_125:
-                return LootSprite[0];
+                return LootSprite[5];
         }
         return LootSprite[0];
     }

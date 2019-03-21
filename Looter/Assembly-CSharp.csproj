@@ -76,6 +76,7 @@
     <Compile Include="Assets\Script\Menu\DataAndAchievementManager.cs" />
     <Compile Include="Assets\Script\Menu\MainMenuButtons.cs" />
     <Compile Include="Assets\Script\Menu\ShopUI.cs" />
+    <Compile Include="Assets\Script\Menu\StatsData.cs" />
     <Compile Include="Assets\Script\Menu\Wardrobe.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/o017861f/Documents/Looter/Looter/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

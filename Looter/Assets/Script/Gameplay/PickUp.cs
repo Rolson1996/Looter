@@ -14,7 +14,6 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
 
         LootLevel = GenerateLootValue(GameplayManager.Instance.createdSections - 2);
 
-
         switch (LootLevel)
         {
             case 1:
@@ -37,7 +36,7 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
                 break;           
         }
         //set sprite of pick up
-
+        this.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PickUpEnum>().GetLootSprite(TypeOfLoot);
 
         GameplayManager.Instance.AddPickUpToList(this.gameObject);
         AlarmManager.E_AlarmStart += DestoryPickUp;
