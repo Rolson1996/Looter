@@ -61,12 +61,12 @@ public class DataAndAchievementManager : MonoBehaviour {
                 statsData = (StatsData)bf.Deserialize(file);
                 file.Close();
 
-                NumberOfLootTypesCollected.Add(LootType.Coin_1, 0);
-                NumberOfLootTypesCollected.Add(LootType.CoinStack_5, 0);
-                NumberOfLootTypesCollected.Add(LootType.CoinBag_10, 0);
-                NumberOfLootTypesCollected.Add(LootType.Diamond_30, 0);
-                NumberOfLootTypesCollected.Add(LootType.DiamondStack_75, 0);
-                NumberOfLootTypesCollected.Add(LootType.DiamondBag_125, 0);
+                NumberOfLootTypesCollected.Add(LootType.Coin_1, statsData.GetLootTypeCounters()[0]);
+                NumberOfLootTypesCollected.Add(LootType.CoinStack_5, statsData.GetLootTypeCounters()[1]);
+                NumberOfLootTypesCollected.Add(LootType.CoinBag_10, statsData.GetLootTypeCounters()[2]);
+                NumberOfLootTypesCollected.Add(LootType.Diamond_30, statsData.GetLootTypeCounters()[3]);
+                NumberOfLootTypesCollected.Add(LootType.DiamondStack_75, statsData.GetLootTypeCounters()[4]);
+                NumberOfLootTypesCollected.Add(LootType.DiamondBag_125, statsData.GetLootTypeCounters()[5]);
                 
                 TotalMetersRan = statsData.GetTotalMeters();
                 FurthestRan = statsData.GetFurthest();
