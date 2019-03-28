@@ -17,6 +17,9 @@ public class GameUI : MonoBehaviour
     public GameObject EscapedPanel;
     public GameObject GameOverPanel;
 
+    public GameObject LootValueCollectedEscaped;
+    private Text LootValueText;
+    private int ShownLootValue;
     public GameObject LootToSafe;
     public GameObject LootToSafeStartLocation;
     public Animation AnimShowLoot = null;
@@ -48,6 +51,13 @@ public class GameUI : MonoBehaviour
             if(pickUpEnum == null)
             {
                 pickUpEnum = this.gameObject.GetComponent<PickUpEnum>();
+            }
+
+            if (LootValueText == null)
+            {
+                LootValueText = LootValueCollectedEscaped.GetComponent<Text>();
+                LootValueText.text = "0";
+                ShownLootValue = 0;
             }
 
             if(!AnimShowLoot.isPlaying && lootShown < collectedLoot.Count)
@@ -118,6 +128,9 @@ public class GameUI : MonoBehaviour
         LootToSafe.GetComponent<Image>().sprite = pickUpEnum.GetLootSprite(collectedLoot[lootShown]);
         LootToSafe.transform.position = LootToSafeStartLocation.transform.position;
         AnimShowLoot.Play();
+
+        ShownLootValue = ShownLootValue + PickUpEnum.GetLootValue(collectedLoot[lootShown]);
+        LootValueText.text = ShownLootValue.ToString();
     }
 
 }
