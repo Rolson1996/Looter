@@ -32,6 +32,7 @@ public class DataAndAchievementManager : MonoBehaviour {
     public int currentSkinNumber = 0;
 
     private StatsData statsData;
+    private PurchaseableUpgrades upgrades;
 
 
     // Use this for initialization
@@ -45,21 +46,21 @@ public class DataAndAchievementManager : MonoBehaviour {
             AUI = Canvas.GetComponent<AchievementsUI>();
 
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = null;
-
+            FileStream fileStats = null;
+            
             try
             {
-                file = File.Open(Application.persistentDataPath + "/statsData.data", FileMode.Open);
+                fileStats = File.Open(Application.persistentDataPath + "/statsData.data", FileMode.Open);
             }
             catch
             {
 
             }
 
-            if (file != null)
+            if (fileStats != null)
             {
-                statsData = (StatsData)bf.Deserialize(file);
-                file.Close();
+                statsData = (StatsData)bf.Deserialize(fileStats);
+                fileStats.Close();
 
                 NumberOfLootTypesCollected.Add(LootType.Coin_1, statsData.GetLootTypeCounters()[0]);
                 NumberOfLootTypesCollected.Add(LootType.CoinStack_5, statsData.GetLootTypeCounters()[1]);
@@ -88,6 +89,27 @@ public class DataAndAchievementManager : MonoBehaviour {
 
                 statsData = new StatsData();
             }
+
+            FileStream fileUpgrades = null;
+
+            try
+            {
+                fileUpgrades = File.Open(Application.persistentDataPath + "/upgradesData.data", FileMode.Open);
+            }
+            catch
+            {
+
+            }
+            if (fileUpgrades != null)
+            {
+                upgrades = (PurchaseableUpgrades)bf.Deserialize(fileUpgrades);
+                fileUpgrades.Close();              
+            }
+            else
+            {                
+                upgrades = new PurchaseableUpgrades();
+            }
+
 
             RefreshUi();
           
@@ -128,9 +150,12 @@ public class DataAndAchievementManager : MonoBehaviour {
         TotalEsacpes = TotalEsacpes + 1;
         AttemptedRaids = AttemptedRaids + 1;
 
-        foreach (LootType loot in LootTypes)
+        if (LootTypes != null)
         {
-            NumberOfLootTypesCollected[loot]++;
+            foreach (LootType loot in LootTypes)
+            {
+                NumberOfLootTypesCollected[loot]++;
+            }
         }
 
         SaveDataToFile();       
