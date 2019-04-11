@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     private CameraFollow cameraFollow;
    
     public float forwardSpeedMultiplier = 1.0F;
-    public float sidewaysSpeedMultiplier = 1.0F;
+    public float sidewaysSpeedMultiplier = DataAndAchievementManager.instance.upgrades.CurrentShoesEffect;
 
     private Transform playerTransform;
     private Rigidbody2D playerRigidBody;

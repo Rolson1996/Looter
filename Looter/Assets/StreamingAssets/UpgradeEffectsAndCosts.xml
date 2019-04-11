@@ -1,0 +1,44 @@
+﻿<Upgrades>
+  <Backpack UpgradeCount="4">
+    <Upgrade Level="1">        
+      <Cost>0</Cost>
+      <Effect>3</Effect>
+    </Upgrade>
+    
+    <Upgrade Level="2">
+      <Cost>20</Cost>
+      <Effect>4</Effect>
+    </Upgrade>
+    
+    <Upgrade Level="3">
+      <Cost>50</Cost>
+      <Effect>5</Effect>
+    </Upgrade>
+
+    <Upgrade Level="4">
+      <Cost>75</Cost>
+      <Effect>6</Effect>
+    </Upgrade>
+  </Backpack>
+  <Shoes UpgradeCount="4">
+    <Upgrade Level="1">
+      <Cost>0</Cost>
+      <Effect>1</Effect>
+    </Upgrade>
+
+    <Upgrade Level="2">
+      <Cost>20</Cost>
+      <Effect>1.1</Effect>
+    </Upgrade>
+
+    <Upgrade Level="3">
+      <Cost>50</Cost>
+      <Effect>1.25</Effect>
+    </Upgrade>
+
+    <Upgrade Level="4">
+      <Cost>75</Cost>
+      <Effect>1.4</Effect>
+    </Upgrade>
+  </Shoes> 
+</Upgrades>

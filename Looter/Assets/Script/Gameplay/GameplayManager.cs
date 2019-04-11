@@ -41,6 +41,8 @@ public class GameplayManager : MonoBehaviour {
         {
             Instance = this;
             DontDestroyOnLoad(this);
+
+            SizeOfBackpack = DataAndAchievementManager.instance.upgrades.CurrentBackpackEffect;
             new CollisionManager();
             new AlarmManager();
 
@@ -67,6 +69,8 @@ public class GameplayManager : MonoBehaviour {
         //reset variables
         PickUpsOnMap.Clear();
         CollectedLoot.Clear();
+
+        SizeOfBackpack = DataAndAchievementManager.instance.upgrades.CurrentBackpackEffect;
 
         currentGamePhase = GamePhase.collecting;
         MetersRan = 0;

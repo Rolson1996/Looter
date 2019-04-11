@@ -7,6 +7,9 @@ using System.Text;
 public class PurchaseableUpgrades
 {
 
-    int BackpackLevel = 1;
-    int RunningShoesLevel = 1;
+    public int BackpackLevel = 1;
+    public int RunningShoesLevel = 1;
+
+    public int CurrentBackpackEffect = 3;
+    public float CurrentShoesEffect = 1F;
 }

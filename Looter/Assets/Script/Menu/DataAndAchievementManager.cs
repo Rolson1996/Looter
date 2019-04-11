@@ -5,7 +5,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataAndAchievementManager : MonoBehaviour {
+
+public class DataAndAchievementManager : MonoBehaviour
+{
 
     public static DataAndAchievementManager instance = null;
 
@@ -22,7 +24,7 @@ public class DataAndAchievementManager : MonoBehaviour {
 
     [HideInInspector]
     public Dictionary<int, bool> UnlockedSkins = new Dictionary<int, bool>();
-   
+
 
     public GameObject Canvas;
     private ShopUI SUI;
@@ -32,7 +34,7 @@ public class DataAndAchievementManager : MonoBehaviour {
     public int currentSkinNumber = 0;
 
     private StatsData statsData;
-    private PurchaseableUpgrades upgrades;
+    public PurchaseableUpgrades upgrades;
 
 
     // Use this for initialization
@@ -47,7 +49,7 @@ public class DataAndAchievementManager : MonoBehaviour {
 
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fileStats = null;
-            
+
             try
             {
                 fileStats = File.Open(Application.persistentDataPath + "/statsData.data", FileMode.Open);
@@ -68,7 +70,7 @@ public class DataAndAchievementManager : MonoBehaviour {
                 NumberOfLootTypesCollected.Add(LootType.Diamond_30, statsData.GetLootTypeCounters()[3]);
                 NumberOfLootTypesCollected.Add(LootType.DiamondStack_75, statsData.GetLootTypeCounters()[4]);
                 NumberOfLootTypesCollected.Add(LootType.DiamondBag_125, statsData.GetLootTypeCounters()[5]);
-                
+
                 TotalMetersRan = statsData.GetTotalMeters();
                 FurthestRan = statsData.GetFurthest();
                 TotalCashCollected = statsData.GetTotalLoot();
@@ -103,21 +105,21 @@ public class DataAndAchievementManager : MonoBehaviour {
             if (fileUpgrades != null)
             {
                 upgrades = (PurchaseableUpgrades)bf.Deserialize(fileUpgrades);
-                fileUpgrades.Close();              
+                fileUpgrades.Close();
             }
             else
-            {                
+            {
                 upgrades = new PurchaseableUpgrades();
             }
 
 
             RefreshUi();
-          
+
             UnlockedSkins.Add(0, true);
             UnlockedSkins.Add(1, true);
             UnlockedSkins.Add(2, true);
             UnlockedSkins.Add(3, true);
-            UnlockedSkins.Add(4, true);          
+            UnlockedSkins.Add(4, true);
         }
         else
         {
@@ -128,8 +130,8 @@ public class DataAndAchievementManager : MonoBehaviour {
             instance.RefreshUi();
             Destroy(this.gameObject);
         }
-        
-        
+
+
     }
 
     public void PlayerEscaped(float MetersRan, int CashCollected, List<LootType> LootTypes)
@@ -139,7 +141,7 @@ public class DataAndAchievementManager : MonoBehaviour {
         TotalCashCollected = TotalCashCollected + CashCollected;
         TotalMetersRan = TotalMetersRan + (MetersRan * 2);
 
-        if(FurthestRan < MetersRan)
+        if (FurthestRan < MetersRan)
         {
             FurthestRan = MetersRan;
         }
@@ -158,7 +160,7 @@ public class DataAndAchievementManager : MonoBehaviour {
             }
         }
 
-        SaveDataToFile();       
+        SaveDataToFile();
     }
     public void PlayerCaught(float MetersRan)
     {
@@ -174,7 +176,7 @@ public class DataAndAchievementManager : MonoBehaviour {
 
     public void RefreshUi()
     {
-        SUI.SetCashNumber(CurrentCash.ToString());
+        SUI.UpdateCashNumber();
 
         AUI.SetTextAttemptedRaids(AttemptedRaids.ToString());
         AUI.SetTextFurthest(((int)FurthestRan).ToString());
@@ -185,7 +187,7 @@ public class DataAndAchievementManager : MonoBehaviour {
 
         int typeNum = 0;
 
-        foreach(KeyValuePair<LootType, int> kvp in NumberOfLootTypesCollected)
+        foreach (KeyValuePair<LootType, int> kvp in NumberOfLootTypesCollected)
         {
             AUI.SetCountOfLootType(typeNum, kvp.Value);
             typeNum++;
@@ -211,9 +213,22 @@ public class DataAndAchievementManager : MonoBehaviour {
         }
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/statsData.data");
-        bf.Serialize(file, statsData);
-        file.Close();
+        FileStream fileStats = File.Create(Application.persistentDataPath + "/statsData.data");
+        bf.Serialize(fileStats, statsData);
+        fileStats.Close();
+
+        FileStream fileUpgrades = File.Create(Application.persistentDataPath + "/upgradesData.data");
+        bf.Serialize(fileUpgrades, upgrades);
+        fileUpgrades.Close();
     }
-    
+
+    public int GetCurrentCash()
+    {
+        return CurrentCash;
+    }
+
+    public void SpendCash(int cost)
+    {
+        CurrentCash = CurrentCash - cost;
+    }
 }
