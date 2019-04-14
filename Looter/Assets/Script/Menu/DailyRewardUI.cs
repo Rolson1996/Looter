@@ -10,10 +10,15 @@ using UnityEngine.UI;
 public class DailyRewardUI : MonoBehaviour
 {
     public GameObject DailyRewardPanel;
-    //public GameObject CollectRewardPanel;
-    //public GameObject WelcomeBackPanel;
+    public GameObject CashGainedLabel;
 
-    private int treak;
+    //public GameObject TotalStreakLabel;
+    //public GameObject StreakProgressLabel;
+
+    private Text CashGainedText;
+
+    //private Text TotalStreakText;
+    //private Text StreakProgressText;
 
     private LastLoginInData lastLoginData;
     public Material dimOutMaterial;
@@ -21,7 +26,10 @@ public class DailyRewardUI : MonoBehaviour
     public GameObject[] DayImages;
     public void AppLoads()
     {
-        
+        CashGainedText = CashGainedLabel.GetComponent<Text>();
+        //TotalStreakText = TotalStreakLabel.GetComponent<Text>();
+        //StreakProgressText = StreakProgressText.GetComponent<Text>();
+    
         DateTime thisLogin = DateTime.Now;
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fileLogin = null;
@@ -44,7 +52,6 @@ public class DailyRewardUI : MonoBehaviour
         {
             lastLoginData = new LastLoginInData();
             lastLoginData.SaveLoginDay(DateTime.MinValue);
-
         }
 
         //var test1 = lastLogin.Date;
@@ -95,34 +102,42 @@ public class DailyRewardUI : MonoBehaviour
             {
                 case 1:
                     DataAndAchievementManager.instance.EarnCash(10);
+                    CashGainedText.text = "10 Cash";
                     arrayNumToRemove = 0;
                     break;
                 case 2:
                     DataAndAchievementManager.instance.EarnCash(15);
+                    CashGainedText.text = "15 Cash";
                     arrayNumToRemove = 1;
                     break;
                 case 3:
                     DataAndAchievementManager.instance.EarnCash(20);
+                    CashGainedText.text = "20 Cash";
                     arrayNumToRemove = 2;
                     break;
                 case 4:
                     DataAndAchievementManager.instance.EarnCash(30);
+                    CashGainedText.text = "30 Cash";
                     arrayNumToRemove = 3;
                     break;
                 case 5:
                     DataAndAchievementManager.instance.EarnCash(40);
+                    CashGainedText.text = "40 Cash";
                     arrayNumToRemove = 4;
                     break;
                 case 6:
                     DataAndAchievementManager.instance.EarnCash(50);
+                    CashGainedText.text = "50 Cash";
                     arrayNumToRemove = 5;
                     break;
                 case 0:
                     DataAndAchievementManager.instance.EarnCash(75);
+                    CashGainedText.text = "75 Cash";
                     arrayNumToRemove = 6;
                     break;
                 default:
                     DataAndAchievementManager.instance.EarnCash(10);
+                    CashGainedText.text = "10 Cash";
                     arrayNumToRemove = 0;
                     break;
             }

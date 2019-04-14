@@ -175,6 +175,8 @@ public class GameplayManager : MonoBehaviour {
     //Event Dispatcher Methods
     void PickedUpLoot(GameObject pickUp, LootCollideEventArgs args)
     {
+        // Play "Bing" sound
+
         CollectedLoot.Add(args.lootType);
         
         UI.SetNumberOfLoot(CollectedLoot.Count);
@@ -188,6 +190,14 @@ public class GameplayManager : MonoBehaviour {
 
     public void DropLoot(GameObject guardHit, GuardCollideEventArgs args)
     {
+        if(PlayerPrefs.HasKey("VibrateActive"))
+        {
+            if(PlayerPrefs.GetInt("VibrateActive") == 1)
+            {
+                Handheld.Vibrate();
+            }
+        }
+
         if (CollectedLoot.Count > 1)
         {
             CollectedLoot.RemoveAt(CollectedLoot.Count - 1);
@@ -201,6 +211,14 @@ public class GameplayManager : MonoBehaviour {
 
     void AlertGuards(GameObject guardHit, GuardCollideEventArgs args)
     {
+        if (PlayerPrefs.HasKey("VibrateActive"))
+        {
+            if (PlayerPrefs.GetInt("VibrateActive") == 1)
+            {
+                Handheld.Vibrate();
+            }
+        }
+
         if (GetCurrentGamePhase() == GamePhase.collecting)
         {
             if (CollectedLoot.Count == 0)

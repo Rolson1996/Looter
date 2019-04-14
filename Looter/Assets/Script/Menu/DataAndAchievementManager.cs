@@ -30,6 +30,7 @@ public class DataAndAchievementManager : MonoBehaviour
     private ShopUI SUI;
     private AchievementsUI AUI;
     private DailyRewardUI DRUI;
+    private SettingsUI SetUI;
 
     public Sprite currentSkin;
     public int currentSkinNumber = 0;
@@ -46,6 +47,7 @@ public class DataAndAchievementManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
             SUI = Canvas.GetComponent<ShopUI>();
+            SetUI = Canvas.GetComponent<SettingsUI>();
             AUI = Canvas.GetComponent<AchievementsUI>();
             DRUI = Canvas.GetComponent<DailyRewardUI>();
 
@@ -131,6 +133,7 @@ public class DataAndAchievementManager : MonoBehaviour
         {
             instance.Canvas = GameObject.FindGameObjectWithTag("Canvas");
             instance.SUI = Canvas.GetComponent<ShopUI>();
+            instance.SetUI = Canvas.GetComponent<SettingsUI>();
             instance.AUI = Canvas.GetComponent<AchievementsUI>();
             instance.DRUI = Canvas.GetComponent<DailyRewardUI>();
 

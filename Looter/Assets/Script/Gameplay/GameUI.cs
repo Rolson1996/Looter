@@ -34,7 +34,6 @@ public class GameUI : MonoBehaviour
 
     public GameObject PausePanel;
     private GamePhase phaseBeforePause;
-    public GameObject SettingPanel;
 
     // Use this for initialization
     void Start()
@@ -90,14 +89,11 @@ public class GameUI : MonoBehaviour
 
         UpdateLoot();
 
-        //PrototypeEscapedText.SetActive(true);
-        EscapedPanel.SetActive(true);
-        //PrototypeEscapedText.GetComponent<Text>().text = "You escaped, congratulations. \nYou escaped with " + LootCount + " piece(s) of loot. \nAmount of money earned: " + LootValue;
+        EscapedPanel.SetActive(true);       
     }
 
     public void GameOver()
     {
-        //PrototypeGameOverText.SetActive(true);
         GameOverPanel.SetActive(true);
         GameOverCharacter.GetComponent<Image>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
@@ -149,7 +145,5 @@ public class GameUI : MonoBehaviour
     {
         GameplayManager.Instance.SetGamePhase(phaseBeforePause);
         PausePanel.SetActive(false);
-    }
-
-    
+    }  
 }
