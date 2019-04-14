@@ -19,12 +19,16 @@ public class Player : MonoBehaviour {
 
     private int turning = 0;
 
+    private bool beenPaused = false;
+
     // Use this for initialization
     void Start () {
         playerTransform = this.gameObject.transform;
         playerRigidBody = this.gameObject.GetComponent<Rigidbody2D>();
         playerRigidBody.velocity = new Vector2(0, ForwardSpeed) * forwardSpeedMultiplier;
         cameraFollow = camera.GetComponent<CameraFollow>();
+
+        sidewaysSpeedMultiplier = DataAndAchievementManager.instance.upgrades.CurrentShoesEffect;
 
         this.gameObject.GetComponent<SpriteRenderer>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
@@ -34,16 +38,20 @@ public class Player : MonoBehaviour {
 
         if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
         {
+            if ( beenPaused)
+            { 
+                playerRigidBody.velocity = new Vector2(0, ForwardSpeed) * forwardSpeedMultiplier;
+                beenPaused = false;
+            }
 
             if (playerTransform.position.y > (6.75 * (GameplayManager.Instance.createdSections - 2)))
             {
                 GameplayManager.Instance.CreateNewSection();
             }
-
         }
         else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning)
         {
-            if(turning > 100)
+            if (turning > 100)
             {
                 GameplayManager.Instance.StartEsacpe();
                 playerRigidBody.rotation = 180F;
@@ -59,22 +67,34 @@ public class Player : MonoBehaviour {
         }
         else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaping)
         {
+            if (beenPaused)
+            {
+                playerRigidBody.velocity = new Vector2(0, EscapeSpeed) * forwardSpeedMultiplier;
+                beenPaused = false;
+            }
+
             if (playerRigidBody.position.y <= 0)
             {
                 GameplayManager.Instance.PlayerEscaped();
             }
         }
         else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.gameOver)
-        {      
-            playerRigidBody.velocity = new Vector2(0, 0);           
+        {
+            playerRigidBody.velocity = new Vector2(0, 0);
         }
         else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.escaped)
-        {                     
+        {
             playerRigidBody.velocity = new Vector2(0, 0);
             playerRigidBody.rotation += 1.8F;
         }
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.paused)
+        {
+            playerRigidBody.velocity = new Vector2(0, 0);
+            beenPaused = true;
+        }
 
-        var pos = transform.localPosition;
+
+            var pos = transform.localPosition;
         pos.x = Mathf.Clamp(pos.x, -2.75F, 2.75F);
         transform.localPosition = pos;
     }
@@ -85,7 +105,7 @@ public class Player : MonoBehaviour {
         {
             playerRigidBody.velocity = new Vector2(2.0F * direction * sidewaysSpeedMultiplier, ForwardSpeed) * forwardSpeedMultiplier;
         }
-        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning)
+        else if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.turning || GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.paused || GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.gameOver)
         {
             playerRigidBody.velocity = new Vector2(0, 0);
         }

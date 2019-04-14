@@ -81,7 +81,7 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
         Destroy(this.gameObject);
     }
 
-    private void DestoryPickUp(GameObject sender, AlarmEventArgs args) //Attach to OnStartTurning Event Dispatcher
+    public void DestoryPickUp(GameObject sender, AlarmEventArgs args) //Attach to OnStartTurning Event Dispatcher
     {
         AlarmManager.E_AlarmStart -= DestoryPickUp;
         Destroy(this.gameObject);

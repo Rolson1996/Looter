@@ -11,7 +11,8 @@ public enum GamePhase
     turning,
     escaping,
     gameOver,
-    escaped
+    escaped,
+    paused
 }
 
 public class GameplayManager : MonoBehaviour {
@@ -134,7 +135,10 @@ public class GameplayManager : MonoBehaviour {
     {
         foreach (GameObject p in PickUpsOnMap)
         {
-            Destroy(p);
+            if (p != null)
+            {
+                p.GetComponent<PickUp>().DestoryPickUp(null, null);
+            }
         }
     }
     //Game Ends Methods

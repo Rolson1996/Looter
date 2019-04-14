@@ -73,7 +73,9 @@
     <Compile Include="Assets\Script\Gameplay\PickUpEnum.cs" />
     <Compile Include="Assets\Script\Gameplay\Player.cs" />
     <Compile Include="Assets\Script\Menu\AchievementsUI.cs" />
+    <Compile Include="Assets\Script\Menu\DailyRewardUI.cs" />
     <Compile Include="Assets\Script\Menu\DataAndAchievementManager.cs" />
+    <Compile Include="Assets\Script\Menu\LoginInData.cs" />
     <Compile Include="Assets\Script\Menu\MainMenuButtons.cs" />
     <Compile Include="Assets\Script\Menu\Purchaseables.cs" />
     <Compile Include="Assets\Script\Menu\ShopUI.cs" />

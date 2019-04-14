@@ -15,6 +15,10 @@ public class AlarmUI : MonoBehaviour {
 
     private void StartAlarmUI(GameObject sender, AlarmEventArgs args)
     {
+        if(AnimAlarm == null)
+        {
+            AnimAlarm = this.GetComponent<Animation>();
+        }
         AlarmActive = true;
         AnimAlarm.wrapMode = WrapMode.Loop;
         AnimAlarm.Play();

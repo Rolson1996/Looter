@@ -48,7 +48,10 @@ public class ShopUI : MonoBehaviour
         BackpackNextEffectText = BackpackNextEffectLabel.GetComponent<Text>();
         BackpackCostText = BackpackCostLabel.GetComponent<Text>();
 
-
+        ShoesLevelText = ShoesLevelLabel.GetComponent<Text>();
+        ShoesCurrentEffectText = ShoesCurrentEffectLabel.GetComponent<Text>();
+        ShoesNextEffectText = ShoesNextEffectLabel.GetComponent<Text>();
+        ShoesCostText = ShoesCostLabel.GetComponent<Text>();
 
         ReadUpgradeDataFromXML();
 
@@ -64,6 +67,21 @@ public class ShopUI : MonoBehaviour
         {
             BackpackNextEffectText.text = "";
             BackpackCostText.text = "Max Level";
+        }
+
+        ShoesLevelText.text = "Level " + DataAndAchievementManager.instance.upgrades.RunningShoesLevel.ToString();
+        
+        ShoesCurrentEffectText.text = "Current Effect   x " + DataAndAchievementManager.instance.upgrades.CurrentShoesEffect .ToString() + " Drfit Speed";
+
+        if (DataAndAchievementManager.instance.upgrades.RunningShoesLevel < ShoesUpgradeCosts.Length)
+        {
+            ShoesNextEffectText.text = "Next Effect   x " + ShoesUpgradeEffects[DataAndAchievementManager.instance.upgrades.RunningShoesLevel] + " Drift Speed";
+            ShoesCostText.text = ShoesUpgradeCosts[DataAndAchievementManager.instance.upgrades.RunningShoesLevel] + " Cash";
+        }
+        else
+        {
+            ShoesNextEffectText.text = "";
+            ShoesCostText.text = "Max Level";
         }
     }
 
@@ -81,9 +99,6 @@ public class ShopUI : MonoBehaviour
             DataAndAchievementManager.instance.upgrades.BackpackLevel++;
             DataAndAchievementManager.instance.upgrades.CurrentBackpackEffect = BackpackUpgradeEffects[DataAndAchievementManager.instance.upgrades.BackpackLevel - 1];
             DataAndAchievementManager.instance.SpendCash(upgradeCost);
-            UpdateCashNumber();
-
-            DataAndAchievementManager.instance.SaveDataToFile();
 
             BackpackLevelText.text = "Level " + DataAndAchievementManager.instance.upgrades.BackpackLevel.ToString();
             BackpackCurrentEffectText.text = "Current Effect   " + DataAndAchievementManager.instance.upgrades.CurrentBackpackEffect.ToString() + " Bag Spaces";
@@ -100,10 +115,36 @@ public class ShopUI : MonoBehaviour
             }
         }
 
-        //increase level of upgrade by 1
-        //Save new effect
-        //deduct amount of cash
-        //change the text in the shop
+        
+
+        //else
+        //display error message
+    }
+
+    public void LevelUpShoes()
+    {
+        int upgradeCost = ShoesUpgradeCosts[DataAndAchievementManager.instance.upgrades.RunningShoesLevel];
+        if (DataAndAchievementManager.instance.GetCurrentCash() >= upgradeCost)
+        {
+            DataAndAchievementManager.instance.upgrades.RunningShoesLevel++;
+            DataAndAchievementManager.instance.upgrades.CurrentShoesEffect = ShoesUpgradeEffects[DataAndAchievementManager.instance.upgrades.RunningShoesLevel - 1];
+            DataAndAchievementManager.instance.SpendCash(upgradeCost);
+
+            ShoesLevelText.text = "Level " + DataAndAchievementManager.instance.upgrades.RunningShoesLevel.ToString();
+            ShoesCurrentEffectText.text = "Current Effect   x " + DataAndAchievementManager.instance.upgrades.CurrentShoesEffect.ToString() + " Drift Speed";
+
+            if (DataAndAchievementManager.instance.upgrades.RunningShoesLevel < ShoesUpgradeCosts.Length)
+            {
+                ShoesNextEffectText.text = "Next Effect   x " + ShoesUpgradeEffects[DataAndAchievementManager.instance.upgrades.RunningShoesLevel] + " Drift Speed";
+                ShoesCostText.text = ShoesUpgradeCosts[DataAndAchievementManager.instance.upgrades.RunningShoesLevel] + " Cash";
+            }
+            else
+            {
+                ShoesNextEffectText.text = "";
+                ShoesCostText.text = "Max Level";
+            }
+        }
+
 
 
         //else

@@ -32,11 +32,16 @@ public class GameUI : MonoBehaviour
     private PickUpEnum pickUpEnum;
     private int lootShown = 0;
 
+    public GameObject PausePanel;
+    private GamePhase phaseBeforePause;
+    public GameObject SettingPanel;
+
     // Use this for initialization
     void Start()
     {       
         EscapedPanel.SetActive(false);
         GameOverPanel.SetActive(false);
+        PausePanel.SetActive(false);
               
     }
     void Update()
@@ -133,4 +138,18 @@ public class GameUI : MonoBehaviour
         LootValueText.text = ShownLootValue.ToString();
     }
 
+    public void PauseGame()
+    {
+        phaseBeforePause = GameplayManager.Instance.GetCurrentGamePhase();
+        GameplayManager.Instance.SetGamePhase(GamePhase.paused);
+        PausePanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        GameplayManager.Instance.SetGamePhase(phaseBeforePause);
+        PausePanel.SetActive(false);
+    }
+
+    
 }

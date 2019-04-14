@@ -29,6 +29,7 @@ public class DataAndAchievementManager : MonoBehaviour
     public GameObject Canvas;
     private ShopUI SUI;
     private AchievementsUI AUI;
+    private DailyRewardUI DRUI;
 
     public Sprite currentSkin;
     public int currentSkinNumber = 0;
@@ -46,12 +47,14 @@ public class DataAndAchievementManager : MonoBehaviour
             DontDestroyOnLoad(this);
             SUI = Canvas.GetComponent<ShopUI>();
             AUI = Canvas.GetComponent<AchievementsUI>();
+            DRUI = Canvas.GetComponent<DailyRewardUI>();
 
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fileStats = null;
 
             try
             {
+                Debug.Log(Application.persistentDataPath);
                 fileStats = File.Open(Application.persistentDataPath + "/statsData.data", FileMode.Open);
             }
             catch
@@ -114,6 +117,9 @@ public class DataAndAchievementManager : MonoBehaviour
 
 
             RefreshUi();
+            DRUI.AppLoads();
+
+            //Daily Reward and Welcome Back
 
             UnlockedSkins.Add(0, true);
             UnlockedSkins.Add(1, true);
@@ -126,6 +132,7 @@ public class DataAndAchievementManager : MonoBehaviour
             instance.Canvas = GameObject.FindGameObjectWithTag("Canvas");
             instance.SUI = Canvas.GetComponent<ShopUI>();
             instance.AUI = Canvas.GetComponent<AchievementsUI>();
+            instance.DRUI = Canvas.GetComponent<DailyRewardUI>();
 
             instance.RefreshUi();
             Destroy(this.gameObject);
@@ -230,5 +237,14 @@ public class DataAndAchievementManager : MonoBehaviour
     public void SpendCash(int cost)
     {
         CurrentCash = CurrentCash - cost;
+        RefreshUi();
+        SaveDataToFile();
+    }
+
+    public void EarnCash(int gain)
+    {
+        CurrentCash = CurrentCash + gain;
+        RefreshUi();
+        SaveDataToFile();
     }
 }
