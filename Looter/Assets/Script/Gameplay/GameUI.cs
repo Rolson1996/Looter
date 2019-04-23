@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//using UnityEngine.Advertisements;
+using UnityEngine.Monetization;
+using UnityEngine.Analytics;
+
 public class GameUI : MonoBehaviour
 {
 
@@ -35,13 +39,25 @@ public class GameUI : MonoBehaviour
     public GameObject PausePanel;
     private GamePhase phaseBeforePause;
 
+    public string placementId = "rewardedVideo";
+
+#if UNITY_IOS
+   private string gameId = "3125490";
+#elif UNITY_ANDROID
+    private string gameId = "3125491";
+#endif
+
     // Use this for initialization
     void Start()
     {       
         EscapedPanel.SetActive(false);
         GameOverPanel.SetActive(false);
         PausePanel.SetActive(false);
-              
+
+        if (Monetization.isSupported)
+        {
+            Monetization.Initialize(gameId, true);
+        }
     }
     void Update()
     {
@@ -89,6 +105,13 @@ public class GameUI : MonoBehaviour
 
         UpdateLoot();
 
+        //Analytics
+        Dictionary<string, object> eventData = new Dictionary<string, object>();
+        eventData.Add("Amount Collected", LootValue);
+        eventData.Add("Distance Ran", MetersRan);
+
+        AnalyticsEvent.Custom("PlayerEsacped", eventData);
+
         EscapedPanel.SetActive(true);       
     }
 
@@ -104,7 +127,13 @@ public class GameUI : MonoBehaviour
     }
     public void WatchedAd()
     {
+        //Analytics
+        AnalyticsEvent.AdComplete(true, AdvertisingNetwork.None);
+
         DataAndAchievementManager.instance.PlayerEscaped(0, lootValue, null);
+        LootValueText.text = (ShownLootValue * 2).ToString();
+
+        ShowAdButton.SetActive(false);
     }
 
     public void ReturnMenu()
@@ -120,8 +149,29 @@ public class GameUI : MonoBehaviour
     public void ShowAdvert()
     {
         //Load advert
-        WatchedAd();
-        ShowAdButton.SetActive(false);      
+        ShowAdCallbacks options = new ShowAdCallbacks();
+        options.finishCallback = HandleShowResult;
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
+        ad.Show(options);
+    }
+
+    void HandleShowResult(ShowResult result)
+    {
+        if (result == ShowResult.Finished)
+        {
+            // Reward the player
+            WatchedAd();
+        }
+        else if (result == ShowResult.Skipped)
+        {
+            Debug.LogWarning("The player skipped the video - DO NOT REWARD!");
+            AnalyticsEvent.Custom("Ad Skipped");
+        }
+        else if (result == ShowResult.Failed)
+        {
+            Debug.LogError("Video failed to show");
+            AnalyticsEvent.Custom("Show Ad Failed");
+        }
     }
 
     private void ShowLoot()
