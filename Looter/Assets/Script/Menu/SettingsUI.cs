@@ -24,8 +24,14 @@ public class SettingsUI : MonoBehaviour
     public GameObject VibrateToggleObject;
     private Toggle VibrateToggle;
 
-    private int BaseVolumeLevel;
-       
+    public GameObject audioObject;
+    private ManageMusic musicManagement;
+
+    void Awake()
+    {
+        musicManagement = audioObject.GetComponent<ManageMusic>();
+    }
+
     public void OpenPanel()
     {
         SettingsPanel.SetActive(true);
@@ -41,11 +47,13 @@ public class SettingsUI : MonoBehaviour
         PlayerPrefs.SetInt("MusicActive", musicActive ? 1 : 0);
 
         SoundMusicSlider.interactable = musicActive;
+        musicManagement.ChangeVolume();
     }
 
     public void MusicVolumeChanged(Single value)
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
+        musicManagement.ChangeVolume();
     }
 
     public void EffectsToggleToggled(bool effectsActive)

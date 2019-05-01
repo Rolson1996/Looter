@@ -32,7 +32,6 @@ public class GameUI : MonoBehaviour
     private List<LootType> collectedLoot;
     private float metersRan;
 
-
     private PickUpEnum pickUpEnum;
     private int lootShown = 0;
 
@@ -96,7 +95,6 @@ public class GameUI : MonoBehaviour
     {
         UITextCapacity.GetComponent<Text>().text = Num.ToString();
     }
-
     public void Escaped(int LootCount, int LootValue, List<LootType> CollectedLoot, float MetersRan)
     {
         lootValue = LootValue;
@@ -114,13 +112,11 @@ public class GameUI : MonoBehaviour
 
         EscapedPanel.SetActive(true);       
     }
-
     public void GameOver()
     {
         GameOverPanel.SetActive(true);
         GameOverCharacter.GetComponent<Image>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
-
     public void UpdateLoot()
     {
         DataAndAchievementManager.instance.PlayerEscaped(metersRan, lootValue, collectedLoot);
@@ -135,17 +131,14 @@ public class GameUI : MonoBehaviour
 
         ShowAdButton.SetActive(false);
     }
-
     public void ReturnMenu()
     {      
         SceneManager.LoadScene(0);
     }
-
     public void PlayAgain()
     {      
         SceneManager.LoadScene(1);
     }
-
     public void ShowAdvert()
     {
         //Load advert
@@ -154,7 +147,6 @@ public class GameUI : MonoBehaviour
         ShowAdPlacementContent ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
         ad.Show(options);
     }
-
     void HandleShowResult(ShowResult result)
     {
         if (result == ShowResult.Finished)
@@ -173,7 +165,6 @@ public class GameUI : MonoBehaviour
             AnalyticsEvent.Custom("Show Ad Failed");
         }
     }
-
     private void ShowLoot()
     {
         LootToSafe.GetComponent<Image>().sprite = pickUpEnum.GetLootSprite(collectedLoot[lootShown]);
@@ -183,14 +174,12 @@ public class GameUI : MonoBehaviour
         ShownLootValue = ShownLootValue + PickUpEnum.GetLootValue(collectedLoot[lootShown]);
         LootValueText.text = ShownLootValue.ToString();
     }
-
     public void PauseGame()
     {
         phaseBeforePause = GameplayManager.Instance.GetCurrentGamePhase();
         GameplayManager.Instance.SetGamePhase(GamePhase.paused);
         PausePanel.SetActive(true);
     }
-
     public void ResumeGame()
     {
         GameplayManager.Instance.SetGamePhase(phaseBeforePause);

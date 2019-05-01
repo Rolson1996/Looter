@@ -7,20 +7,14 @@ public class Guard : MonoBehaviour, IPlayerCollides {
     private float PatrolSpeed = 2.0F;
     public List<GameObject> Waypoints;
     private int TargetWaypoint = 0;
-    public void CollideWithPlayer()
-    {
-        //Event Dispacter
-        CollisionManager.GuardCollides(this.gameObject, new GuardCollideEventArgs(this));
-        Destroy(this.gameObject);
-    }
 
+   
     // Use this for initialization
     void Start ()
     {
         AlarmManager.E_AlarmStart += IncreaseGuardSpeed;       
 	}
-	
-	// Update is called once per frame
+    // Update is called once per frame
 	void Update () {
 
         //Animation
@@ -41,7 +35,12 @@ public class Guard : MonoBehaviour, IPlayerCollides {
             }
         }
     }
-
+    public void CollideWithPlayer()
+    {
+        //Event Dispacter
+        CollisionManager.GuardCollides(this.gameObject, new GuardCollideEventArgs(this));
+        Destroy(this.gameObject);
+    }
     private void IncreaseGuardSpeed(GameObject sender, AlarmEventArgs args)
     {
         PatrolSpeed = 3.0F;

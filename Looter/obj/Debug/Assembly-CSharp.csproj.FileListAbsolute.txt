@@ -343,7 +343,6 @@ C:\Users\o017861f.STUDENT\OneDrive - Staffordshire University\Mobile Dev\Looter\
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\Boo.Lang.dll
-C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\Facebook.Unity.Settings.dll
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\mscorlib.dll
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\System.Core.dll
 C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\System.dll
@@ -682,3 +681,5 @@ C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.dll
 C:\Users\o017861f.STUDENT\Documents\Looter SourceTree\Looter\obj\Debug\Assembly-CSharp.pdb
+C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\UnityEngine.Advertisements.Editor.dll
+C:\Users\o017861f\Documents\Looter\Looter\Temp\bin\Debug\UnityEngine.Monetization.Editor.dll

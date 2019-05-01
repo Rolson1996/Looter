@@ -30,14 +30,12 @@ public class DataAndAchievementManager : MonoBehaviour
     private ShopUI SUI;
     private AchievementsUI AUI;
     private DailyRewardUI DRUI;
-    private SettingsUI SetUI;
 
     public Sprite currentSkin;
     public int currentSkinNumber = 0;
 
     private StatsData statsData;
     public PurchaseableUpgrades upgrades;
-
 
     // Use this for initialization
     void Awake()
@@ -47,7 +45,6 @@ public class DataAndAchievementManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
             SUI = Canvas.GetComponent<ShopUI>();
-            SetUI = Canvas.GetComponent<SettingsUI>();
             AUI = Canvas.GetComponent<AchievementsUI>();
             DRUI = Canvas.GetComponent<DailyRewardUI>();
 
@@ -133,7 +130,6 @@ public class DataAndAchievementManager : MonoBehaviour
         {
             instance.Canvas = GameObject.FindGameObjectWithTag("Canvas");
             instance.SUI = Canvas.GetComponent<ShopUI>();
-            instance.SetUI = Canvas.GetComponent<SettingsUI>();
             instance.AUI = Canvas.GetComponent<AchievementsUI>();
             instance.DRUI = Canvas.GetComponent<DailyRewardUI>();
 
@@ -143,7 +139,6 @@ public class DataAndAchievementManager : MonoBehaviour
 
 
     }
-
     public void PlayerEscaped(float MetersRan, int CashCollected, List<LootType> LootTypes)
     {
         CurrentCash = CurrentCash + CashCollected;
@@ -183,7 +178,6 @@ public class DataAndAchievementManager : MonoBehaviour
         }
         SaveDataToFile();
     }
-
     public void RefreshUi()
     {
         SUI.UpdateCashNumber();
@@ -203,7 +197,6 @@ public class DataAndAchievementManager : MonoBehaviour
             typeNum++;
         }
     }
-
     public void SaveDataToFile()
     {
         //Save Data to file
@@ -231,19 +224,16 @@ public class DataAndAchievementManager : MonoBehaviour
         bf.Serialize(fileUpgrades, upgrades);
         fileUpgrades.Close();
     }
-
     public int GetCurrentCash()
     {
         return CurrentCash;
     }
-
     public void SpendCash(int cost)
     {
         CurrentCash = CurrentCash - cost;
         RefreshUi();
         SaveDataToFile();
     }
-
     public void EarnCash(int gain)
     {
         CurrentCash = CurrentCash + gain;

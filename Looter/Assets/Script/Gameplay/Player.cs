@@ -32,7 +32,6 @@ public class Player : MonoBehaviour {
 
         this.gameObject.GetComponent<SpriteRenderer>().sprite = DataAndAchievementManager.instance.currentSkin;
     }
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour {
                 beenPaused = false;
             }
 
-            if (playerRigidBody.position.y <= 0)
+            if (playerRigidBody.position.y <= 0.5)
             {
                 GameplayManager.Instance.PlayerEscaped();
             }
@@ -98,7 +97,6 @@ public class Player : MonoBehaviour {
         pos.x = Mathf.Clamp(pos.x, -2.75F, 2.75F);
         transform.localPosition = pos;
     }
-
     public void StartMoveSideways(int direction)
     {
         if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
@@ -115,7 +113,6 @@ public class Player : MonoBehaviour {
               
         }       
     }
-
     public void StopMoveSideways(int direction)
     {       
         if (GameplayManager.Instance.GetCurrentGamePhase() == GamePhase.collecting)
@@ -131,12 +128,10 @@ public class Player : MonoBehaviour {
             playerRigidBody.velocity = new Vector2(0, EscapeSpeed) * forwardSpeedMultiplier;
         }
     }
-
     public void SetVelocityForEscape()
     {
         playerRigidBody.velocity = new Vector2(0, EscapeSpeed) * forwardSpeedMultiplier;
     }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         IPlayerCollides interactable = collision.GetComponent<IPlayerCollides>();

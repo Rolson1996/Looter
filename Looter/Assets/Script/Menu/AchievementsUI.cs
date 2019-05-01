@@ -38,7 +38,6 @@ public class AchievementsUI : MonoBehaviour {
     {
         TotalVaultEscapesText.GetComponent<Text>().text = newValue + " Escapes";
     }
-
     public void SetCountOfLootType(int type, int count)
     {
         LootTypeCounters[type].GetComponent<Text>().text = count.ToString();

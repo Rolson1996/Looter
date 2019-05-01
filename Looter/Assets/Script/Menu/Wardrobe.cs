@@ -26,7 +26,6 @@ namespace Assets.Script.Menu
         {
             LoadUI();
         }
-
         public void LoadUI()
         {
             UnlockedSkins.Clear();
@@ -97,7 +96,6 @@ namespace Assets.Script.Menu
             SelectedSkinOut.GetComponent<Image>().sprite = UnlockedSkins[DataAndAchievementManager.instance.currentSkinNumber];
             SelectedSkinOut.GetComponent<RectTransform>().rotation = new Quaternion(0,0,180,0);
         }
-
         public void CycleSkins(int direction)
         {
             MiddleSkin = MiddleSkin + direction;
@@ -210,7 +208,6 @@ namespace Assets.Script.Menu
 
             
         }
-
         public void SelectSkin(int BoxNumber)
         {
             int SelectedSkinNumber = MiddleSkin + BoxNumber;

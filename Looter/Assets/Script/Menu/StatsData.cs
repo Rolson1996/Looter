@@ -20,7 +20,6 @@ public class StatsData
     {
         return CurrentCash;
     }
-
     public float GetTotalMeters()
     {
         return TotalMetersRan;
@@ -45,13 +44,10 @@ public class StatsData
     {
         return TotalVaultEscapes;
     }
-
     public int[] GetLootTypeCounters()
     {
         return LootTypeCounters;
     }
-
-
     public void SetCurrentCash(int newValue)
     {
         CurrentCash = newValue;

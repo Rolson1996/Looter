@@ -36,6 +36,9 @@ public class GameplayManager : MonoBehaviour {
 
     private float MetersRan = 0;
 
+    public AudioSource PingSource;
+    public AudioSource HurtSource;
+
     void Awake()
     {
         if(Instance == null)
@@ -55,6 +58,7 @@ public class GameplayManager : MonoBehaviour {
 
             CollisionManager.E_GuardCollides += AlertGuards;
             CollisionManager.E_LootCollides += PickedUpLoot;
+
         }
         else
         {
@@ -86,35 +90,25 @@ public class GameplayManager : MonoBehaviour {
         CreateNewSection();
         CollisionManager.E_GuardCollides -= DropLoot;
         CollisionManager.E_GuardCollides += AlertGuards;
-    }
-    // Update is called once per frame
-    void Update ()
-    {
-        		
-	}
-    
+    }   
     public void StartTurning()
     {
         currentGamePhase = GamePhase.turning;
         MetersRan = player.transform.position.y;
     }
-
     public void StartEsacpe()
     {
         currentGamePhase = GamePhase.escaping;
         player.GetComponent<Player>().SetVelocityForEscape();
     }
-
     public void SetGamePhase(GamePhase newPhase)
     {
         currentGamePhase = newPhase;
     }
-
     public GamePhase GetCurrentGamePhase()
     {
         return currentGamePhase;
     }
-
     public void CreateNewSection()
     {
         if (currentGamePhase == GamePhase.collecting)
@@ -125,12 +119,10 @@ public class GameplayManager : MonoBehaviour {
             createdSections++;
         }
     }
-
     public void AddPickUpToList(GameObject p)
     {
         PickUpsOnMap.Add(p);
     }
-
     private void RemovePickUpsFromMap()
     {
         foreach (GameObject p in PickUpsOnMap)
@@ -170,12 +162,16 @@ public class GameplayManager : MonoBehaviour {
 
         UI.GameOver();
     }
-
-
     //Event Dispatcher Methods
-    void PickedUpLoot(GameObject pickUp, LootCollideEventArgs args)
+    public void PickedUpLoot(GameObject pickUp, LootCollideEventArgs args)
     {
         // Play "Bing" sound
+        if (!(PlayerPrefs.HasKey("EffectsActive") && PlayerPrefs.GetInt("EffectsActive") == 0))
+        {
+            PingSource.volume = PlayerPrefs.GetFloat("EffectsVolume");
+            PingSource.Play();
+        }
+        
 
         CollectedLoot.Add(args.lootType);
         
@@ -187,15 +183,17 @@ public class GameplayManager : MonoBehaviour {
             RemovePickUpsFromMap();
         }
     }
-
     public void DropLoot(GameObject guardHit, GuardCollideEventArgs args)
     {
-        if(PlayerPrefs.HasKey("VibrateActive"))
+        if (!(PlayerPrefs.HasKey("VibrateActive") && PlayerPrefs.GetInt("VibrateActive") == 0))
         {
-            if(PlayerPrefs.GetInt("VibrateActive") == 1)
-            {
-                Handheld.Vibrate();
-            }
+            Handheld.Vibrate();
+        }
+
+        if (!(PlayerPrefs.HasKey("EffectsActive") && PlayerPrefs.GetInt("EffectsActive") == 0))
+        {
+            HurtSource.volume = PlayerPrefs.GetFloat("EffectsVolume");
+            HurtSource.Play();
         }
 
         if (CollectedLoot.Count > 1)
@@ -208,8 +206,7 @@ public class GameplayManager : MonoBehaviour {
             GameOver();
         }
     }
-
-    void AlertGuards(GameObject guardHit, GuardCollideEventArgs args)
+    public void AlertGuards(GameObject guardHit, GuardCollideEventArgs args)
     {
         if (PlayerPrefs.HasKey("VibrateActive"))
         {

@@ -12,18 +12,18 @@ public class DailyRewardUI : MonoBehaviour
     public GameObject DailyRewardPanel;
     public GameObject CashGainedLabel;
 
+    private Text CashGainedText;
+
     //public GameObject TotalStreakLabel;
     //public GameObject StreakProgressLabel;
-
-    private Text CashGainedText;
 
     //private Text TotalStreakText;
     //private Text StreakProgressText;
 
     private LastLoginInData lastLoginData;
-    public Material dimOutMaterial;
 
     public GameObject[] DayImages;
+
     public void AppLoads()
     {
         CashGainedText = CashGainedLabel.GetComponent<Text>();
@@ -154,7 +154,6 @@ public class DailyRewardUI : MonoBehaviour
             fileSaveLogin.Close();
         }
     }
-    
     public void CloseDailyRewardPanel()
     {
         DailyRewardPanel.SetActive(false);

@@ -11,8 +11,8 @@ public class MainMenuButtons : MonoBehaviour {
     public GameObject AchievePanel;
     private Animation AnimAchieve;
 
-    public GameObject QuestsPanel;
-    private Animation AnimQuests;
+    //public GameObject QuestsPanel;
+    //private Animation AnimQuests;
 
     public bool SidePanelOpen = false;
 
@@ -21,11 +21,11 @@ public class MainMenuButtons : MonoBehaviour {
 	void Start ()
     {
         AchievePanel.SetActive(true);
-        QuestsPanel.SetActive(true);
+        //QuestsPanel.SetActive(true);
 
         AnimStore = StorePanel.GetComponent<Animation>();
         AnimAchieve = AchievePanel.GetComponent<Animation>();
-        AnimQuests = QuestsPanel.GetComponent<Animation>();
+        //AnimQuests = QuestsPanel.GetComponent<Animation>();
         
     }
 
@@ -44,7 +44,7 @@ public class MainMenuButtons : MonoBehaviour {
             //Pull over store panel from left      
             AnimStore.Play("OpenStorePanel");
             AnimAchieve.Play("HideAchieveTab");
-            AnimQuests.Play("HideQuestsTab");
+            //AnimQuests.Play("HideQuestsTab");
             SidePanelOpen = true;
         }
     }
@@ -55,7 +55,7 @@ public class MainMenuButtons : MonoBehaviour {
             //Push store panel to the right
             AnimStore.Play("CloseStorePanel");
             AnimAchieve.Play("ShowAchieveTab");
-            AnimQuests.Play("ShowQuestsTab");
+            //AnimQuests.Play("ShowQuestsTab");
             SidePanelOpen = false;
         }
     }
@@ -67,7 +67,7 @@ public class MainMenuButtons : MonoBehaviour {
             //pull over achievement Panel From right          
             AnimAchieve.Play("OpenAchievePanel");
             AnimStore.Play("HideStoreTab");
-            AnimQuests.Play("HideQuestsTab");
+            //AnimQuests.Play("HideQuestsTab");
             SidePanelOpen = true;
         }
     }
@@ -78,30 +78,30 @@ public class MainMenuButtons : MonoBehaviour {
             //Push achievement Panel to the right
             AnimAchieve.Play("CloseAchievePanel");
             AnimStore.Play("ShowStoreTab");
-            AnimQuests.Play("ShowQuestsTab");
+            //AnimQuests.Play("ShowQuestsTab");
             SidePanelOpen = false;
         }
     }
-    public void OpenQuests()
-    {
-        if (!SidePanelOpen)
-        {
-            //pull over achievement Panel From right          
-            AnimAchieve.Play("HideAchieveTab");
-            AnimStore.Play("HideStoreTab");
-            AnimQuests.Play("OpenQuestsPanel");
-            SidePanelOpen = true;
-        }
-    }
-    public void CloseQuests()
-    {
-        if (SidePanelOpen)
-        {
-            //Push achievement Panel to the right
-            AnimAchieve.Play("ShowAchieveTab");
-            AnimStore.Play("ShowStoreTab");
-            AnimQuests.Play("CloseQuestsPanel");
-            SidePanelOpen = false;
-        }
-    }
+    //public void OpenQuests()
+    //{
+    //    if (!SidePanelOpen)
+    //    {
+    //        //pull over achievement Panel From right          
+    //        AnimAchieve.Play("HideAchieveTab");
+    //        AnimStore.Play("HideStoreTab");
+    //        AnimQuests.Play("OpenQuestsPanel");
+    //        SidePanelOpen = true;
+    //    }
+    //}
+    //public void CloseQuests()
+    //{
+    //    if (SidePanelOpen)
+    //    {
+    //        //Push achievement Panel to the right
+    //        AnimAchieve.Play("ShowAchieveTab");
+    //        AnimStore.Play("ShowStoreTab");
+    //        AnimQuests.Play("CloseQuestsPanel");
+    //        SidePanelOpen = false;
+    //    }
+    //}
 }

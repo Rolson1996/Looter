@@ -7,8 +7,6 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
     private LootType TypeOfLoot;
     private int LootLevel;
     
-
-
 	// Use this for initialization
 	void Start () {
 
@@ -42,12 +40,6 @@ public class PickUp : MonoBehaviour, IPlayerCollides {
         AlarmManager.E_AlarmStart += DestoryPickUp;
     }
 	
-	// Update is called once per frame
-	void Update ()
-    {
-		//animation?
-	}
-
     private int GenerateLootValue(int currentLevel)
     {
         int lootBound = currentLevel / 3;
